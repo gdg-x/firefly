@@ -1,0 +1,9 @@
+<google-map center="map.center" options="map.options" zoom="map.zoom" draggable="true">
+	<markers models="markers" idKey="'id'" clusterOptions="map.cluster" coords="'coordinates'" doCluster="true" click="'onClick'">
+		<window ng-repeat="marker in markers" coords="marker.coordinates" show="marker.show">
+			<div>
+				<b>{{marker.title}}</b>
+			</div>
+		</window>
+	</markers>
+</google-map>

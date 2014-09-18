@@ -1,0 +1,87 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div ng-switch="prefix">
+	<div ng-switch-when="undefined">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card card-map">
+						<event-map position="geo"></event-map>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<h3>Upcoming Events</h3>
+							<p>
+								<div class="pull-left" style="margin-right: 10px;" ng-repeat="(key, value) in tags">
+									<a href="http://{{key}}.gdg.events/">{{key}} ({{value}})</a>
+								</div>
+								<p class="clearfix"></p>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-switch-default>
+		<div class="container" ng-show="tag">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card card-map">
+						<event-map position="geo" tag="prefix"></event-map>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="row" ng-show="geo.latitude">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<h3><i class="fa fa-map-marker"></i> {{tag.title}} Event near you</h3>
+									<p><small>TODO: Show next tagged event near the user's locations</small></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-show="nextEvent">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<h3><i class="fa fa-clock-o"></i> Next {{tag.title}} Event</h3>
+									<div class="row">
+										<div class="col-md-3"></div>
+										<div class="col-md-9">
+											{{nextEvent.title}}
+											<p><small>TODO: Show the very next upcoming tagged event</small></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<h3>About {{tag.title}}</h3>
+							<p>{{tag.description}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>
