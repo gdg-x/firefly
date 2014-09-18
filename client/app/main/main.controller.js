@@ -13,10 +13,11 @@ angular.module('fireflyApp')
 
 	var processNextEvent = function(data) {
 		$scope.nextEvent = data.items[0];
+		$scope.allEvents = data;
 	}
 
-	if($scope.prefix) {
-      $http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+$scope.prefix+'/upcoming?perpage=1&callback=JSON_CALLBACK').success(processNextEvent);
+    if($scope.prefix) {
+      $http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+$scope.prefix+'/upcoming?perpage=9999&callback=JSON_CALLBACK').success(processNextEvent);
     } else {
       $http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=1&callback=JSON_CALLBACK').success(processNextEvent);
     }
