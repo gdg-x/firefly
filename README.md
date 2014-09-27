@@ -11,3 +11,5 @@ promote events for GDG Brussels.
 
 Furthermore, it can be uses as url shortner like gdg.events/ag62fd to direct to the events page.
 
+There is no need for organizers to clone this repo or host this project on their servers.
+
