@@ -19,6 +19,7 @@ Clone the git repository, then
 ```
 bower install
 grunt install
+monogd
 grunt serve
 ```
 
