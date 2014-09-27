@@ -13,3 +13,16 @@ Furthermore, it can be uses as url shortner like gdg.events/ag62fd to direct to 
 
 There is no need for organizers to clone this repo or host this project on their servers.
 
+Local Development
+=================
+Clone the git repository, then
+```
+bower install
+grunt install
+grunt serve
+```
+
+`client` contains an angular.js app to show event maps
+`server` contains the logic for the url shortener
+
+
