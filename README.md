@@ -1,7 +1,5 @@
 Firefly
 =======
-Fireflies are winged beetles that use bioluminescence to attract mates or prey.
-
 This project is to help organizers to better promote their events.
 
 It relies on the data stored on the GDG[x] Hub.
