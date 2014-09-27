@@ -125,14 +125,14 @@ module.exports = function(app) {
         };
 
         if(!shortUrl) {
-          request.get('https://hub.gdgx.io/api/v1/events/'+req.params.hash, function(err, res) {
-            if(err || !res.body._id)
+          request.get('https://hub.gdgx.io/api/v1/events/'+req.params.hash, function(err, eventsRes) {
+            if(err || !eventsRes.body._id)
               return res.send(404,"Not found.");
 
             ShortUrl.create({
-              event_id: res.body._id,
-              chapter_id: res.body.chapter,
-              hash: hash.store(res.body._id+res.body.chapter)
+              event_id: eventsRes.body._id,
+              chapter_id: eventsRes.body.chapter,
+              hash: hash.store(eventsRes.body._id+eventsRes.body.chapter)
             }, function(err, shortUrl) {
               if(err) {
                 console.error(err);
