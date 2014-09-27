@@ -2,7 +2,8 @@
 	<markers models="markers" idKey="'id'" clusterOptions="map.cluster" coords="'coordinates'" doCluster="true" click="'onClick'">
 		<window ng-repeat="marker in markers" coords="marker.coordinates" show="marker.show">
 			<div>
-				<b>{{marker.title}}</b>
+				
+                            <b><a href="http://gdg.events/{{marker.chapter}}-{{marker.id}}">{{marker.title}}</a></b>
 			</div>
 		</window>
 	</markers>
