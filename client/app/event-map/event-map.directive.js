@@ -39,6 +39,8 @@ angular.module('fireflyApp')
             if(event.geo) {
               var marker = {
                 id: event._id,
+                chapter: event.chapter,
+                eventUrl: event.eventUrl,
                 title: event.title,
                 start: event.start,
                 end: event.end,

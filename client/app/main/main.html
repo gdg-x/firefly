@@ -49,7 +49,17 @@
 							<div class="card">
 								<div class="card-body">
 									<h3><i class="fa fa-map-marker"></i> {{tag.title}} Event near you</h3>
-									<p><small>TODO: Show next tagged event near the user's locations</small></p>
+                                    <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-9">
+                                            <div ng-repeat="event in allEvents | orderBy:distanceFromHere | limitTo:5">
+                                                <p>
+                                                    <a href="http://gdg.events/{{event.chapter}}-{{event._id}}">{{event.title}}</a><br/>
+                                                    {{event.start | date : 'medium' : event.timezone}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
 								</div>
 							</div>
 						</div>
@@ -58,12 +68,16 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-body">
-									<h3><i class="fa fa-clock-o"></i> Next {{tag.title}} Event</h3>
+									<h3><i class="fa fa-clock-o"></i> Next {{tag.title}} Events</h3>
 									<div class="row">
 										<div class="col-md-3"></div>
 										<div class="col-md-9">
-											{{nextEvent.title}}
-											<p><small>TODO: Show the very next upcoming tagged event</small></p>
+											<div ng-repeat="event in allEvents | orderBy:'start' | limitTo:5">
+                                                <p>
+                                                    <a href="http://gdg.events/{{event.chapter}}-{{event._id}}">{{event.title}}</a><br/>
+                                                    {{event.start | date : 'medium' : event.timezone}}
+                                                </p>
+                                            </div>
 										</div>
 									</div>
 								</div>
