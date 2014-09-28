@@ -54,7 +54,7 @@
                                         <div class="col-md-9">
                                             <div ng-repeat="event in allEvents | orderBy:distanceFromHere | limitTo:5">
                                                 <p>
-                                                    <a href="http://gdg.events/{{event.chapter}}-{{event._id}}">{{event.title}}</a><br/>
+                                                    <a href="http://gdg.events/{{event._id}}">{{event.title}}</a><br/>
                                                     {{event.start | date : 'medium' : event.timezone}}
                                                 </p>
                                             </div>
@@ -74,7 +74,7 @@
 										<div class="col-md-9">
 											<div ng-repeat="event in allEvents | orderBy:'start' | limitTo:5">
                                                 <p>
-                                                    <a href="http://gdg.events/{{event.chapter}}-{{event._id}}">{{event.title}}</a><br/>
+                                                    <a href="http://gdg.events/{{event._id}}">{{event.title}}</a><br/>
                                                     {{event.start | date : 'medium' : event.timezone}}
                                                 </p>
                                             </div>
