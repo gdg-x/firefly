@@ -35,6 +35,10 @@
 	</div>
 	<div ng-switch-default>
 		<div class="container" ng-show="tag">
+            <meta view-head property="og:type" content="website">
+            <meta view-head property="og:description" content="{{tag.description}}">
+            <meta view-head property="og:title" content="{{tag.title}}">
+            <view-title>{{tag.title}}</view-title>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card card-map">
