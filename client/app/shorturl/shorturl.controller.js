@@ -2,6 +2,39 @@
 
 angular.module('fireflyApp')
   .controller('ShorturlEventCtrl', function ($scope, $http, $routeParams) {
+
+        var processEventData = function (data, status, headers, config) {
+            if (data.geo) {
+                data.geo.latitude = data.geo.lat;
+                data.geo.longitude = data.geo.lng;
+                data.geo.zoom = 11;
+                data.geo.center = {
+                    latitude: data.geo.latitude,
+                    longitude: data.geo.longitude
+                };
+                delete data.geo.lat;
+                delete data.geo.lng;
+            }
+            $scope.event = data;
+
+            $http.get("https://www.googleapis.com/plus/v1/people/" + $scope.event.chapter + "?fields=image&key=AIzaSyD7v04m_bTu-rcWtuaN3fTP9NBmjhB7lXg").success(function (data) {
+                $scope.image = data.image.url.replace("sz=50", "sz=70");
+            });
+
+            $http.jsonp("https://hub.gdgx.io/api/v1/chapters/" + $scope.event.chapter+"?callback=JSON_CALLBACK").success(function (data, status, headers, config) {
+                if (data.geo) {
+                    data.geo.latitude = data.geo.lat;
+                    data.geo.longitude = data.geo.lng;
+                    delete data.geo.lat;
+                    delete data.geo.lng;
+                }
+                $scope.chapter = data;
+            });
+        };
+        $http.get("/api/shorturl/"+$routeParams['hash']).success(function(data) {
+            $scope.shorturl = data;
+            $http.jsonp("https://hub.gdgx.io/api/v1/events/" + data.event_id+"?callback=JSON_CALLBACK").success(processEventData);
+        });
   })
   .controller('ShorturlAnalyticsCtrl', function ($scope, $http, $routeParams) {
     $scope.referrers = {

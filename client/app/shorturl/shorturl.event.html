@@ -1,0 +1,110 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>{{event.title}} <small><time-ago date="event.start"></time-ago></small></h3>
+                    <div class="card">
+                        <div class="card-body">
+                            <p>
+                                <div ng-bind-html="event.about | linkify"></div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3><i class="fa fa-clock-o"></i> Your Time</h3>
+                            <p>
+                                <b>Begins:</b> <span><local-time date="event.start"></local-time></span><br/>
+                                <b>Ends:</b> <span><local-time date="event.end"></local-time></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3><i class="fa fa-clock-o"></i> Event Time</h3>
+                            <p>
+                                <b>Begins:</b> <span><time-timezone date="event.start" timezone="event.timezone"></time-timezone></span><br/>
+                                <b>Ends:</b> <span><time-timezone date="event.end" timezone="event.timezone"></time-timezone></span><br/>
+                                <b>Timezone:</b> {{event.timezone}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3><i class="fa fa-map-marker"></i> Location</h3>
+                            <p>
+                                {{event.location}}<br/><br/>
+                                <a ng-href="https://maps.google.com/maps?daddr={{event.location}}">Get directions</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Hosted by</h3>
+                    <div class="card">
+                        <div class="card-body">
+                            <p>
+                                <img ng-show="chapter._id != undefined" class="pull-right" style="margin-top: 11px;" ng-src="{{image}}"/>
+                                <h3><a ng-href="http://developers.google.com/groups/chapter/{{chapter._id}}/">{{chapter.name}}</a></h3>
+                                <span>{{chapter.city}}, {{chapter.country.name}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Event sites</h3>
+                    <div class="card">
+                        <div class="card-body">
+                            <p>
+                                <div ng-switch on="!!event.eventUrl">
+                                    <div ng-switch-when="true">
+                                        <a ng-href="{{event.eventUrl}}">Google+ event page</a>
+                                    </div>
+                                    <div ng-switch-default>...</div>
+                                </div>
+                                <a ng-href="http://developers.google.com/events/{{event._id}}/">Google Developers' event page</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>
+                                <div ng-switch on="!!event.geo">
+                                    <div ng-switch-when="true">
+                                        <google-map center="event.geo.center" zoom="event.geo.zoom">
+                                            <marker coords='event.geo'>
+
+                                            </marker>
+                                        </google-map>
+                                    </div>
+                                    <div ng-switch-default>...</div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
