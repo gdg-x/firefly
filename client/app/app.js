@@ -8,7 +8,8 @@ angular.module('fireflyApp', [
   'ui.bootstrap',
   'googlechart',
   'google-maps',
-  'ngGeolocation'
+  'ngGeolocation',
+  'linkify'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
