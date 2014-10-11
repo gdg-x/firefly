@@ -15,6 +15,9 @@ angular.module('fireflyApp')
         var start = null;
 
         var radiansTo = function (start, end) {
+            if(!start || !end)
+                return 0;
+            
             var d2r = Math.PI / 180.0;
             var lat1rad = start.latitude * d2r;
             var long1rad = start.longitude * d2r;
