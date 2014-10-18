@@ -16,8 +16,8 @@ Local Development
 Clone the git repository, then
 ```
 bower install
-grunt install
-monogd
+npm install
+mongod
 grunt serve
 ```
 
