@@ -7,7 +7,7 @@ angular.module('fireflyApp', [
   'ngRoute',
   'ui.bootstrap',
   'googlechart',
-  'google-maps',
+  'google-maps'.ns(),
   'ngGeolocation',
   'linkify',
   'viewhead'
@@ -20,6 +20,13 @@ angular.module('fireflyApp', [
 
     $locationProvider.html5Mode(true);
   })
+  .config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
+        GoogleMapApi.configure({
+            //    key: 'your api key',
+            v: '3.17',
+            libraries: 'weather,geometry,visualization'
+        });
+  }])
   .run(function($rootScope, $geolocation, $http) {
 
     $rootScope.prefix = window.location.hostname.replace(".gdg.events","");

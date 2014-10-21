@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .directive('eventMap', function ($http) {
+  .directive('eventMap', ['$http', 'GoogleMapApi'.ns(), function ($http, GoogleMapApi) {
     return {
       templateUrl: 'app/event-map/event-map.html',
       restrict: 'EA',
@@ -70,4 +70,4 @@ angular.module('fireflyApp')
         }
       }
     };
-  });
+  }]);

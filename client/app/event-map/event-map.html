@@ -1,10 +1,9 @@
-<google-map center="map.center" options="map.options" zoom="map.zoom" draggable="true">
-	<markers models="markers" idKey="'id'" clusterOptions="map.cluster" coords="'coordinates'" doCluster="true" click="'onClick'">
-		<window ng-repeat="marker in markers" coords="marker.coordinates" show="marker.show">
+<ui-gmap-google-map center="map.center" options="map.options" zoom="map.zoom" draggable="true">
+	<ui-gmap-markers models="markers" idKey="'id'" clusterOptions="map.cluster" coords="'coordinates'" doCluster="true" click="'onClick'">
+		<ui-gmap-window ng-repeat="marker in markers" coords="marker.coordinates" show="marker.show">
 			<div>
-				
-                            <b><a href="/{{marker.id}}/">{{marker.title}}</a></b>
+				<b><a href="/{{marker.id}}/">{{marker.title}}</a></b>
 			</div>
-		</window>
-	</markers>
-</google-map>
+		</ui-gmap-window>
+	</ui-gmap-markers>
+</ui-gmap-google-map>

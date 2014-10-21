@@ -89,21 +89,17 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <p>
+                    <h3>Map</h3>
+                    <div class="card" style="padding: 0px">
                                 <div ng-switch on="!!event.geo">
                                     <div ng-switch-when="true">
-                                        <google-map center="event.geo.center" zoom="event.geo.zoom">
-                                            <marker coords='event.geo'>
-
-                                            </marker>
-                                        </google-map>
+                                <ui-gmap-google-map center="event.geo.center" zoom="event.geo.zoom">
+                                    <ui-gmap-marker coords="event.geo" idkey="event._id">
+                                    </ui-gmap-marker>
+                                </ui-gmap-google-map>
                                     </div>
                                     <div ng-switch-default>...</div>
                                 </div>
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
