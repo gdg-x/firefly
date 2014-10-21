@@ -110,12 +110,9 @@ module.exports = function(app) {
         };
 
         var redirect = function(req, shortUrl) {
-          if(req && shortUrl) {
-            console.log("Woooo!");
-          }
 
           if(shortUrl.event_id) {
-            res.redirect(301, "https://hub.gdgx.io/events/"+shortUrl.event_id);
+            res.redirect(301, "https://gdg.events/"+shortUrl.event_id+"/");
           } else {
             res.redirect(301, shortUrl.url);
           }

@@ -75,11 +75,14 @@
                     <div class="card">
                         <div class="card-body">
                             <p>
+                                Short URL to this Site:<br/>
+                                <a ng-href="http://gdg.events/{{shorturl.hash}}">http://gdg.events/{{shorturl.hash}}</a>
+
                                 <div ng-switch on="!!event.eventUrl">
                                     <div ng-switch-when="true">
                                         <a ng-href="{{event.eventUrl}}">Google+ event page</a>
                                     </div>
-                                    <div ng-switch-default>...</div>
+                                    <div ng-switch-default></div>
                                 </div>
                                 <a ng-href="http://developers.google.com/events/{{event._id}}/">Google Developers' event page</a>
                             </p>
@@ -91,15 +94,15 @@
                 <div class="col-md-12">
                     <h3>Map</h3>
                     <div class="card" style="padding: 0px">
-                                <div ng-switch on="!!event.geo">
-                                    <div ng-switch-when="true">
+                        <div ng-switch on="!!event.geo">
+                            <div ng-switch-when="true">
                                 <ui-gmap-google-map center="event.geo.center" zoom="event.geo.zoom">
                                     <ui-gmap-marker coords="event.geo" idkey="event._id">
                                     </ui-gmap-marker>
                                 </ui-gmap-google-map>
-                                    </div>
-                                    <div ng-switch-default>...</div>
-                                </div>
+                            </div>
+                            <div ng-switch-default>...</div>
+                        </div>
                     </div>
                 </div>
             </div>
