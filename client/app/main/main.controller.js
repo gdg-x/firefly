@@ -14,6 +14,9 @@ angular.module('fireflyApp')
     $scope.distanceFromHere = function (_item, _startPoint) {
         var start = null;
 
+        if(!_item.geo)
+            return Number.MAX_VALUE;
+
         var radiansTo = function (start, end) {
             if(!start || !end)
                 return 0;
