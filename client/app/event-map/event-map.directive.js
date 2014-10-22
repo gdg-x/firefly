@@ -36,9 +36,8 @@ angular.module('fireflyApp')
         });
 
         scope.$watch("position", function(position, old) {
-          if(position && scope.maps) {
+          if(position) {
             angular.copy(position, scope.map.center);
-            scope.maps.event.trigger(scope.map.control.getGMap(), 'resize');
           }
         })
 
