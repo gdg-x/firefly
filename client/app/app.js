@@ -46,14 +46,7 @@ angular.module('fireflyApp', [
         .error(function(error) {
           $rootScope.prefix = undefined;
         });
-    } else {
-      
-      $http.jsonp('https://hub.gdgx.io/api/v1/events/stats?callback=JSON_CALLBACK')
-        .success(function(data) {
-          $rootScope.tags = data['upcoming_top_tags'];
-        });
     }
-
     $geolocation.watchPosition({
         timeout: 60000,
         maximumAge: 250,

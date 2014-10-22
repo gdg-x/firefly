@@ -11,6 +11,11 @@ angular.module('fireflyApp')
 		}
 	});
 
+    $http.jsonp('https://hub.gdgx.io/api/v1/events/stats?callback=JSON_CALLBACK')
+        .success(function(data) {
+          $scope.tags = data['upcoming_top_tags'];
+    });
+
     $scope.distanceFromHere = function (_item, _startPoint) {
         var start = null;
 
@@ -60,6 +65,6 @@ angular.module('fireflyApp')
 	if($scope.prefix) {
       $http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+$scope.prefix+'/upcoming?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
     } else {
-      $http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=1&callback=JSON_CALLBACK').success(processNextEvent);
+      $http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=100&callback=JSON_CALLBACK').success(processNextEvent);
     }
   });
