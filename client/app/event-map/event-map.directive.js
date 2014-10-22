@@ -16,6 +16,7 @@ angular.module('fireflyApp')
                 longitude: -73
             },
             zoom: 5,
+            control: {},
             cluster: {
               maxZoom: 7
             },
@@ -23,12 +24,21 @@ angular.module('fireflyApp')
           };
 
           $scope.markers = [];
+          
       },
       link: function (scope, element, attrs) {
 
+        GoogleMapApi.then(function(maps) {
+          scope.maps = maps;
+          maps.event.addListener(scope.map.control.getGMap(), 'tilesloaded', function(evt) {
+            maps.event.trigger(scope.map.control.getGMap(), 'resize');
+          });
+        });
+
         scope.$watch("position", function(position, old) {
-          if(position) {
+          if(position && scope.maps) {
             angular.copy(position, scope.map.center);
+            scope.maps.event.trigger(scope.map.control.getGMap(), 'resize');
           }
         })
 
@@ -59,6 +69,7 @@ angular.module('fireflyApp')
               }.bind(marker, marker);
 
               scope.markers.push(marker);
+              if(scope.maps) scope.maps.event.trigger(scope.map.control.getGMap(), 'resize');
             }
           }
         };

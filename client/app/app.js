@@ -61,11 +61,15 @@ angular.module('fireflyApp', [
     });
 
     $rootScope.$on('$geolocation.position.changed', function(event, value) {
-      $rootScope.geo = {
-        latitude: value.coords.latitude,
-        longitude: value.coords.longitude,
-        timestamp: value.timestamp
-      };
+      if(!$rootScope.geo ||
+        (value.coords.latitude != $rootScope.latitude &&
+         value.coords.longitude != $rootScope.longitude)) {
+        $rootScope.geo = {
+          latitude: value.coords.latitude,
+          longitude: value.coords.longitude,
+          timestamp: value.timestamp
+        };
+      }
     });
 
     $rootScope.$watch('$geolocation.position.error', function(value) {
