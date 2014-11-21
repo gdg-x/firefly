@@ -29,6 +29,7 @@ angular.module('fireflyApp', [
   }])
   .run(function($rootScope, $geolocation, $http) {
 
+    $rootScope.all = window.location.search.indexOf("all") >= 0;
     $rootScope.prefix = window.location.hostname.replace(".gdg.events","");
 
     if($rootScope.prefix == window.location.hostname )
