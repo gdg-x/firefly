@@ -24,4 +24,15 @@ grunt serve
 `client` contains an angular.js app to show event maps
 `server` contains the logic for the url shortener
 
+Prod Deployment
+===============
+1. Create `dist` directory in the root folder of the project
+2. Clone the deploy repo of the server into dist
+3. Execute `grunt build`
+4. change into `dist` and add, commit, push the server to deploy repo
+5. check the server at http://gdg.events
+
+
+
+
 
