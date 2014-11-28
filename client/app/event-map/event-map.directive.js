@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .directive('eventMap', ['$http', 'GoogleMapApi'.ns(), function ($http, GoogleMapApi) {
+  .directive('eventMap', ['$http', 'uiGmapGoogleMapApi', function ($http, uiGmapGoogleMapApi) {
     return {
       templateUrl: 'app/event-map/event-map.html',
       restrict: 'EA',
@@ -28,7 +28,7 @@ angular.module('fireflyApp')
       },
       link: function (scope, element, attrs) {
 
-        GoogleMapApi.then(function(maps) {
+        uiGmapGoogleMapApi.then(function(maps) {
           scope.maps = maps;
           maps.event.addListener(scope.map.control.getGMap(), 'tilesloaded', function(evt) {
             maps.event.trigger(scope.map.control.getGMap(), 'resize');

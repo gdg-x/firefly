@@ -76,7 +76,9 @@
                         <div class="card-body">
                             <p>
                                 Short URL to this Site:<br/>
-                                <a ng-href="http://gdg.events/{{shorturl.hash}}">http://gdg.events/{{shorturl.hash}}</a>
+                                <a ng-href="http://gdg.events/{{shorturl.hash}}">http://gdg.events/{{shorturl.hash}}
+                                  <qr input-mode="'8bit'" size="150" text="gdgeventsshorturl" image="true"></qr>
+                                </a>
 
                                 <div ng-switch on="!!event.eventUrl">
                                     <div ng-switch-when="true">

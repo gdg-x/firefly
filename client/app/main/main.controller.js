@@ -63,17 +63,16 @@ angular.module('fireflyApp')
 	}
 
 	if($scope.prefix) {
-		if ($scope.all){
+		if ($scope.all) {
       			$http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+$scope.prefix+'?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
 		} else {
 			$http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+$scope.prefix+'/upcoming?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
-		}
-    	} else {
+    	}
+    }else {
     		if ($scope.all){
          		$http.jsonp('https://hub.gdgx.io/api/v1/events?perpage=100&callback=JSON_CALLBACK').success(processNextEvent);
     		} else {
     			$http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=100&callback=JSON_CALLBACK').success(processNextEvent);
     		}
     	}
-    }
   });

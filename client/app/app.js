@@ -7,10 +7,11 @@ angular.module('fireflyApp', [
   'ngRoute',
   'ui.bootstrap',
   'googlechart',
-  'google-maps'.ns(),
+  'uiGmapgoogle-maps',
   'ngGeolocation',
   'linkify',
-  'viewhead'
+  'viewhead',
+  'ja.qr'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -20,7 +21,7 @@ angular.module('fireflyApp', [
 
     $locationProvider.html5Mode(true);
   })
-  .config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
+  .config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
         GoogleMapApi.configure({
             //    key: 'your api key',
             v: '3.17',

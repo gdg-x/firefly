@@ -2,7 +2,7 @@
 
 angular.module('fireflyApp')
   .controller('ShorturlEventCtrl', function ($scope, $http, $routeParams) {
-
+        $scope.gdgeventsshorturl = "";
         var processEventData = function (data, status, headers, config) {
             if (data.geo) {
                 data.geo.latitude = data.geo.lat;
@@ -33,6 +33,7 @@ angular.module('fireflyApp')
         };
         $http.get("/api/shorturl/"+$routeParams['hash']).success(function(data) {
             $scope.shorturl = data;
+            $scope.gdgeventsshorturl = "http://gdg.events/" + data.hash;
             $http.jsonp("https://hub.gdgx.io/api/v1/events/" + data.event_id+"?callback=JSON_CALLBACK").success(processEventData);
         });
   })
