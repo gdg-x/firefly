@@ -4,10 +4,13 @@ This project is to help organizers to better promote their events.
 
 It relies on the data stored on the GDG[x] Hub.
 
-Organizers can use short urls like devfest.gdg.events to promote devfests, or brussels.gdg.events to 
+**List of events**
+Organizers can use short urls like http://devfest.gdg.events to promote devfests, or http://brussels.gdg.events (to be implemented) to 
 promote events for GDG Brussels.
 
-Furthermore, it can be uses as url shortner like gdg.events/ag62fd to direct to the events page.
+**Url shortener**
+Furthermore, it can be uses as url shortner like http://gdg.events/ag62fd to direct to the events page.
+The statistics are shown at http://gdg.events/ag62fd/analytics
 
 There is no need for organizers to clone this repo or host this project on their servers.
 
