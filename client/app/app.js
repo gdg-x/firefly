@@ -5,6 +5,7 @@ angular.module('fireflyApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
+  'ngMaterial',
   'ui.bootstrap',
   'googlechart',
   'uiGmapgoogle-maps',
@@ -68,6 +69,6 @@ angular.module('fireflyApp', [
     });
 
     $rootScope.$watch('$geolocation.position.error', function(value) {
-        
+
     });
   });
