@@ -1,71 +1,72 @@
-<div layout="row" ng-include="'components/navbar/navbar.html'"></div>
-
-<div ng-show="tag">
-    <meta view-head property="og:type" content="website">
-    <meta view-head property="og:description" content="{{tag.description}}">
-    <meta view-head property="og:title" content="{{tag.title}}">
-    <view-title>{{tag.title}}</view-title>
-	<div layout="row">
-    <event-map layout-fill position="geo" tag="prefix"></event-map>
-	</div>
-	<div layout="row" id="card-box">
-    <div hidde show-gt-md flex-gt-md="10"></div>
-    <div flex flex-lg="80">
-      <div layout-sm="column" layout-gt-md="row">
-        <div flex>
-          <div ng-show="geo.latitude">
-            <md-card>
-                <h3><i class="fa fa-map-marker"></i> {{tag.title}} Events near you</h3>
-                  <div layout="row" layout-margin>
-                    <div flex="5"></div>
-                    <div flex="95">
-                      <div ng-repeat="event in allEvents | orderBy:distanceFromHere | limitTo:5">
-                        <p>
-                          <a href="/{{event._id}}/">{{event.title}}</a><br/>
-                          {{event.start | date : 'medium' : event.timezone}}
-                        </p>
+<div layout="column" layout-fill>
+  <div layout="row" ng-include="'components/navbar/navbar.html'"></div>
+  <div layout="column" ng-show="tag">
+      <meta view-head property="og:type" content="website">
+      <meta view-head property="og:description" content="{{tag.description}}">
+      <meta view-head property="og:title" content="{{tag.title}}">
+      <view-title>{{tag.title}}</view-title>
+    <div layout="row">
+      <event-map layout-fill position="geo" tag="prefix"></event-map>
+    </div>
+    <div layout="row" id="card-box">
+      <div hidde show-gt-md flex-gt-md="10"></div>
+      <div flex flex-lg="80">
+        <div layout-sm="column" layout-gt-md="row">
+          <div flex>
+            <div ng-show="geo.latitude">
+              <md-card>
+                  <h3><i class="fa fa-map-marker"></i> {{tag.title}} Events near you</h3>
+                    <div layout="row" layout-margin>
+                      <div flex="5"></div>
+                      <div flex="95">
+                        <div ng-repeat="event in allEvents | orderBy:distanceFromHere | limitTo:5">
+                          <p>
+                            <a href="/{{event._id}}/">{{event.title}}</a><br/>
+                            {{event.start | date : 'medium' : event.timezone}}
+                          </p>
+                        </div>
                       </div>
                     </div>
+                </md-card>
+            </div>
+            <div ng-show="nextEvent">
+              <md-card>
+                <h3><i class="fa fa-clock-o"></i> Next {{tag.title}} Events</h3>
+                <div layout="row" layout-margin>
+                  <div flex="5"></div>
+                  <div flex="95">
+                    <div ng-repeat="event in allEvents | orderBy:'start' | limitTo:5">
+                      <p>
+                          <a href="/{{event._id}}/">{{event.title}}</a><br/>
+                          {{event.start | date : 'medium' : event.timezone}}
+                      </p>
+                    </div>
                   </div>
+                </div>
               </md-card>
+            </div>
           </div>
-          <div ng-show="nextEvent">
+          <div flex>
             <md-card>
-              <h3><i class="fa fa-clock-o"></i> Next {{tag.title}} Events</h3>
-              <div layout="row" layout-margin>
-                <div flex="5"></div>
-                <div flex="95">
-                  <div ng-repeat="event in allEvents | orderBy:'start' | limitTo:5">
-                    <p>
-                        <a href="/{{event._id}}/">{{event.title}}</a><br/>
-                        {{event.start | date : 'medium' : event.timezone}}
-                    </p>
-                  </div>
+              <h3>About {{tag.title}}</h3>
+              <p>{{tag.description}}</p>
+            </md-card>
+            <md-card>
+              <div ng-switch="prefix">
+                <h3 ng-switch-when="undefined">Popular upcoming topics</h3>
+                <h3 ng-switch-default>Other Popular upcoming topics</h3>
+              </div>
+              <div>
+                <div style="display: inline-block; padding: 5px;" ng-repeat="(key, value) in tags">
+                  <a href="http://{{key}}.gdg.events/">{{key}} ({{value}})</a>
                 </div>
               </div>
             </md-card>
           </div>
         </div>
-        <div flex>
-          <md-card>
-            <h3>About {{tag.title}}</h3>
-            <p>{{tag.description}}</p>
-          </md-card>
-          <md-card>
-            <div ng-switch="prefix">
-              <h3 ng-switch-when="undefined">Popular upcoming topics</h3>
-              <h3 ng-switch-default>Other Popular upcoming topics</h3>
-            </div>
-            <div>
-              <div style="display: inline-block; padding: 5px;" ng-repeat="(key, value) in tags">
-                <a href="http://{{key}}.gdg.events/">{{key}} ({{value}})</a>
-              </div>
-            </div>
-          </md-card>
-        </div>
       </div>
-	  </div>
-    <div hidde show-gt-md flex-gt-md="10"></div>
+      <div hidde show-gt-md flex-gt-md="10"></div>
+    </div>
   </div>
+  <div layout="column" ng-include="'components/footer/footer.html'"></div>
 </div>
-<div layout="column" ng-include="'components/footer/footer.html'"></div>
