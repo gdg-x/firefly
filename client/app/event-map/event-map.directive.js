@@ -12,7 +12,7 @@ angular.module('fireflyApp')
       controller: function($scope) {
           $scope.map = {
             center: {
-                latitude: 45, 
+                latitude: 45,
                 longitude: -73
             },
             zoom: 5,
@@ -20,11 +20,11 @@ angular.module('fireflyApp')
             cluster: {
               maxZoom: 7
             },
-            options: {}
+            options: {scrollwheel: false}
           };
 
           $scope.markers = [];
-          
+
       },
       link: function (scope, element, attrs) {
 
