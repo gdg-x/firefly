@@ -1,5 +1,7 @@
-<ui-gmap-google-map center="map.center" options="map.options" zoom="map.zoom" draggable="true" control="map.control" ng-show="map != null">
-	<ui-gmap-markers models="markers" idKey="'id'" clusterOptions="map.cluster" coords="'coordinates'" doCluster="true" click="'onClick'">
+<ui-gmap-google-map center="map.center" options="map.options" zoom="map.zoom"
+                    draggable="true" control="map.control" ng-show="map != null">
+	<ui-gmap-markers models="markers" idKey="'id'" clusterOptions="map.cluster"
+                   coords="'coordinates'" doCluster="true" click="'onClick'">
 		<ui-gmap-window ng-repeat="marker in markers" coords="marker.coordinates" show="marker.show">
 			<div>
 				<b><a href="/{{marker.id}}/">{{marker.title}}</a></b>

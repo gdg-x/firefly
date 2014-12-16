@@ -8,6 +8,9 @@ angular.module('fireflyApp')
                 data.geo.latitude = data.geo.lat;
                 data.geo.longitude = data.geo.lng;
                 data.geo.zoom = 11;
+                data.geo.options = {
+                  scrollwheel: false
+                };
                 data.geo.center = {
                     latitude: data.geo.latitude,
                     longitude: data.geo.longitude
