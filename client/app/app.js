@@ -33,8 +33,9 @@ angular.module('fireflyApp', [
     $rootScope.all = window.location.search.indexOf("all") >= 0;
     $rootScope.prefix = window.location.hostname.replace(".gdg.events","");
 
-    if($rootScope.prefix == window.location.hostname )
-       $rootScope.prefix = "devfest";
+    if($rootScope.prefix == window.location.hostname ) {
+       $rootScope.prefix = "wtm";
+    }
 
     if($rootScope.prefix) {
       $http.jsonp('https://hub.gdgx.io/api/v1/tags/'+ $rootScope.prefix+'?callback=JSON_CALLBACK')
