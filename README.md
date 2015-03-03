@@ -1,5 +1,6 @@
 Firefly
 =======
+
 This project is to help organizers to better promote their events.
 
 It relies on the data stored on the GDG[x] Hub.
@@ -13,6 +14,14 @@ Furthermore, it can be uses as url shortner like http://gdg.events/ag62fd to dir
 The statistics are shown at http://gdg.events/ag62fd/analytics
 
 There is no need for organizers to clone this repo or host this project on their servers.
+
+Contribute
+=================
+
+Get involved: [![Join the chat at https://gitter.im/gdg-x/firefly](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gdg-x/firefly?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+Discuss [issues](https://github.com/gdg-x/firefly/issues) and [pull requests](https://github.com/gdg-x/firefly/pulls).
+
 
 Local Development
 =================
