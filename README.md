@@ -1,5 +1,7 @@
 Firefly
 =======
+
+[![Join the chat at https://gitter.im/gdg-x/firefly](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gdg-x/firefly?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 This project is to help organizers to better promote their events.
 
 It relies on the data stored on the GDG[x] Hub.
