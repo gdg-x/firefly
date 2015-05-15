@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('fireflyApp')
-   .directive('timeTimezone', ['$http', function($http) {
+   .directive('timeTimezone', ['$http', function() {
       return {
             restrict: 'E',
             template: '{{formatDate}}',
             scope: {
-              date: "=",
-              timezone: "="
+              date: '=',
+              timezone: '='
             },
-            link: function(scope, element, attrs) {
+            link: function(scope) {
 
               var update = function upd() {
                 if(scope.timezone && scope.date) {
@@ -17,11 +17,11 @@ angular.module('fireflyApp')
                 }
               };
 
-              scope.$watch('date', function(oldVal, newVal) {
+              scope.$watch('date', function() {
                 update();
               });
 
-              scope.$watch('timezone', function(oldVal, newVal) {
+              scope.$watch('timezone', function() {
                 update();
               });
             }
@@ -32,9 +32,9 @@ angular.module('fireflyApp')
             restrict: 'E',
             template: '{{formatDate}}',
             scope: {
-              date: "="
+              date: '='
             },
-            link: function(scope, element, attrs) {
+            link: function(scope) {
               var promise = null;
 
               var update = function() {
@@ -44,7 +44,7 @@ angular.module('fireflyApp')
                 }
               };
 
-              scope.$watch('date', function(oldVal, newVal) {
+              scope.$watch('date', function() {
                 if(promise) {
                   $timeout.cancel(promise);
                 }
@@ -58,16 +58,14 @@ angular.module('fireflyApp')
             restrict: 'E',
             template: '{{formatDate}}',
             scope: {
-              date: "="
+              date: '='
             },
-            link: function(scope, element, attrs) {
-              var promise = promise;
-
+            link: function(scope) {
               var update = function upd() {
                   scope.formatDate = moment(scope.date).format('llll');
               };
 
-              scope.$watch('date', function(oldVal, newVal) {
+              scope.$watch('date', function() {
                 update();
               });
             }
@@ -78,16 +76,14 @@ angular.module('fireflyApp')
             restrict: 'E',
             template: '{{formatDate}}',
             scope: {
-              date: "="
+              date: '='
             },
-            link: function(scope, element, attrs) {
-              var promise = promise;
-
+            link: function(scope) {
               var update = function upd() {
                   scope.formatDate = moment(scope.date).utc().format('llll');
               };
 
-              scope.$watch('date', function(oldVal, newVal) {
+              scope.$watch('date', function() {
                 update();
               });
             }

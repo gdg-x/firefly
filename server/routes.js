@@ -6,7 +6,7 @@
 
 var errors = require('./components/errors');
 var request = require('superagent');
-var ShortUrl = require('./api/shorturl/shorturl.model');
+var shortUrl = require('./api/shorturl/shorturl.model');
 var hash = require('short-id');
 var geoip = require("geoip-native");
 
@@ -32,21 +32,22 @@ module.exports = function(app) {
   // All other routes should redirect to the index.html
   app.route('/:hash')
     .get(function(req, res) {
-      ShortUrl.findOne({ $or:[ {'hash': req.params.hash }, {'event_id': req.params.hash } ]}, function(err, shortUrl) {
+      shortUrl.findOne({ $or:[ {'hash': req.params.hash }, {'event_id': req.params.hash } ]}, function(err, shortUrl) {
         var me = this;
 
         var recordHit = function(req, shortUrl) {
           var geoIp = geoip.lookup(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
           var userAgent = require('ua-parser').parse(req.headers['user-agent']);
-          var referer = req.headers['referer'] || "Unknown";
+          var referrer = req.headers.referrer || "Unknown";
+          var i, j, k, l;
 
           shortUrl.hits++;
 
           var platFound = false;
-          for(var i = 0; i < shortUrl.platforms.length; i++) {
+          for(i = 0; i < shortUrl.platforms.length; i++) {
             var platform = shortUrl.platforms[i];
 
-            if(platform.name == userAgent.os.family) {
+            if(platform.name === userAgent.os.family) {
               platform.hits++;
               platFound = true;
             }
@@ -59,10 +60,10 @@ module.exports = function(app) {
           }
 
           var browserFound = false;
-          for(var i = 0; i < shortUrl.browsers.length; i++) {
-            var browser = shortUrl.browsers[i];
+          for(j = 0; j < shortUrl.browsers.length; j++) {
+            var browser = shortUrl.browsers[j];
 
-            if(browser.name == userAgent.ua.family) {
+            if(browser.name === userAgent.ua.family) {
               browser.hits++;
               browserFound = true;
             }
@@ -75,10 +76,10 @@ module.exports = function(app) {
           }
 
           var countryFound = false;
-          for(var i = 0; i < shortUrl.countries.length; i++) {
-            var country = shortUrl.countries[i];
+          for(k = 0; k < shortUrl.countries.length; k++) {
+            var country = shortUrl.countries[k];
 
-            if(country.name == geoIp.name) {
+            if(country.name === geoIp.name) {
               country.hits++;
               countryFound = true;
             }
@@ -91,17 +92,17 @@ module.exports = function(app) {
           }
 
           var referrerFound = false;
-          for(var i = 0; i < shortUrl.referrers.length; i++) {
-            var referrer = shortUrl.referrers[i];
+          for(l = 0; l < shortUrl.referrers.length; l++) {
+            var shortReferrer = shortUrl.referrers[l];
 
-            if(referrer.name == referer) {
-              referrer.hits++;
+            if(shortReferrer.name === referrer) {
+              shortReferrer.hits++;
               referrerFound = true;
             }
           }
           if(!referrerFound) {
             shortUrl.referrers.push({
-              name: referer,
+              name: referrer,
               hits: 1
             })
           }
@@ -126,7 +127,7 @@ module.exports = function(app) {
             if(err || !eventsRes.body._id)
               return res.send(404,"Not found.");
 
-            ShortUrl.create({
+            shortUrl.create({
               event_id: eventsRes.body._id,
               chapter_id: eventsRes.body.chapter,
               hash: hash.store(eventsRes.body._id+eventsRes.body.chapter)

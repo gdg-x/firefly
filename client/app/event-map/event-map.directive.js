@@ -7,7 +7,7 @@ angular.module('fireflyApp')
       restrict: 'EA',
       scope: {
         position: '=',
-        tag: "="
+        tag: '='
       },
       controller: function($scope) {
           $scope.map = {
@@ -26,23 +26,24 @@ angular.module('fireflyApp')
           $scope.markers = [];
 
       },
-      link: function (scope, element, attrs) {
+      link: function (scope) {
 
         uiGmapGoogleMapApi.then(function(maps) {
           scope.maps = maps;
-          maps.event.addListener(scope.map.control.getGMap(), 'tilesloaded', function(evt) {
+          maps.event.addListener(scope.map.control.getGMap(), 'tilesloaded', function() {
             maps.event.trigger(scope.map.control.getGMap(), 'resize');
           });
         });
 
-        scope.$watch("position", function(position, old) {
+        scope.$watch('position', function(position) {
           if(position) {
             angular.copy(position, scope.map.center);
           }
-        })
+        });
 
         var processEvents = function(data) {
-          for(var i = 0; i < data.items.length; i++) {
+          var i;
+          for(i = 0; i < data.items.length; i++) {
             var event = data.items[i];
 
             if(event.geo) {
@@ -64,11 +65,13 @@ angular.module('fireflyApp')
               marker.onClick = function(marker) {
                 scope.$apply(function() {
                   marker.show = !marker.show;
-                })
-              }.bind(marker, marker);
+                });
+              }.bind(marker, marker); // jshint ignore:line
 
               scope.markers.push(marker);
-              if(scope.maps) scope.maps.event.trigger(scope.map.control.getGMap(), 'resize');
+              if(scope.maps) {
+                scope.maps.event.trigger(scope.map.control.getGMap(), 'resize');
+              }
             }
           }
         };

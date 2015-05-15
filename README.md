@@ -10,7 +10,7 @@ Organizers can use short urls like http://devfest.gdg.events to promote devfests
 promote events for GDG Brussels.
 
 **Url shortener**
-Furthermore, it can be uses as url shortner like http://gdg.events/ag62fd to direct to the events page.
+Furthermore, it can be uses as url shortener like http://gdg.events/ag62fd to direct to the events page.
 The statistics are shown at http://gdg.events/ag62fd/analytics
 
 There is no need for organizers to clone this repo or host this project on their servers.
