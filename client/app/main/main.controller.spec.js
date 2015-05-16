@@ -1,20 +1,14 @@
 'use strict';
 
 describe('Controller: MainCtrl', function () {
+  var MainCtrl, scope, $httpBackend;
 
   // load the controller's module
   beforeEach(module('fireflyApp'));
 
-  var MainCtrl,
-      scope,
-      $httpBackend;
-
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/things')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
-
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
       $scope: scope
@@ -22,7 +16,15 @@ describe('Controller: MainCtrl', function () {
   }));
 
   it('should attach a list of things to the scope', function () {
+    $httpBackend.expectJSONP(
+      'https://hub.gdgx.io/api/v1/tags/'+ scope.prefix + '?callback=JSON_CALLBACK').respond([]);
+    $httpBackend.expectJSONP('https://hub.gdgx.io/api/v1/events/stats?callback=JSON_CALLBACK')
+      .respond({ upcoming_top_tags: ['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express'] }); // jshint ignore:line
+    $httpBackend.expectJSONP(
+      'https://hub.gdgx.io/api/v1/events/tag/'+ scope.prefix + '/upcoming?perpage=999&callback=JSON_CALLBACK')
+      .respond([]);
+
     $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
+    expect(scope.tags.length).toBe(4);
   });
 });

@@ -1,16 +1,15 @@
 'use strict';
 
-describe('Controller: ShorturlCtrl', function () {
+describe('Controller: ShorturlEventCtrl', function () {
+  var ShorturlEventCtrl, scope;
 
   // load the controller's module
   beforeEach(module('fireflyApp'));
 
-  var ShorturlCtrl, scope;
-
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ShorturlCtrl = $controller('ShorturlCtrl', {
+    ShorturlEventCtrl = $controller('ShorturlEventCtrl', {
       $scope: scope
     });
   }));
