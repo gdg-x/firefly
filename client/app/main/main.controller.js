@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('MainCtrl', function ($rootScope, $scope, $http, $geolocation) {
+  .controller('MainCtrl', function ($rootScope, $scope, $http) {
 
   	$scope.nearEvent = undefined;
 
-	$rootScope.$watch("geo", function(geo) {
+	$rootScope.$watch('geo', function(geo) {
 		if(geo) {
 
 		}
@@ -13,19 +13,22 @@ angular.module('fireflyApp')
 
     $http.jsonp('https://hub.gdgx.io/api/v1/events/stats?callback=JSON_CALLBACK')
         .success(function(data) {
-          $scope.tags = data['upcoming_top_tags'];
-    });
+          $scope.tags = data.upcoming_top_tags; // jshint ignore:line
+        }
+    );
 
     $scope.distanceFromHere = function (_item, _startPoint) {
         var start = null;
 
-        if(!_item.geo)
-            return Number.MAX_VALUE;
+        if(!_item.geo) {
+          return Number.MAX_VALUE;
+        }
 
         var radiansTo = function (start, end) {
-            if(!start || !end)
-                return 0;
-            
+            if(!start || !end) {
+              return 0;
+            }
+
             var d2r = Math.PI / 180.0;
             var lat1rad = start.latitude * d2r;
             var long1rad = start.longitude * d2r;
@@ -55,12 +58,12 @@ angular.module('fireflyApp')
 
         var num = radiansTo(start, end) * 3958.8;
         return Math.round(num * 100) / 100;
-    }
+    };
 
 	var processNextEvent = function(data) {
 		$scope.nextEvent = data.items[0];
         	$scope.allEvents = data.items;
-	}
+	};
 
 	if($scope.prefix) {
 		if ($scope.all) {
