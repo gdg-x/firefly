@@ -6,6 +6,7 @@ angular.module('fireflyApp', [
   'ngSanitize',
   'ngRoute',
   'ngMaterial',
+  'ngAria',
   'ui.bootstrap',
   'googlechart',
   'uiGmapgoogle-maps',
@@ -14,13 +15,17 @@ angular.module('fireflyApp', [
   'viewhead',
   'ja.qr'
 ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
     $routeProvider
       .otherwise({
         redirectTo: '/'
       });
 
     $locationProvider.html5Mode(true);
+
+    $mdThemingProvider.theme('default')
+        .primaryPalette('deep-orange')
+        .accentPalette('indigo');
   })
   .config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
         GoogleMapApi.configure({

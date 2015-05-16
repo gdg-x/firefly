@@ -1,11 +1,6 @@
 <md-toolbar>
   <div class="md-toolbar-tools" ng-controller="NavbarCtrl">
-    <div class="navbar-brand">
-      <a href="/"><img src="assets/images/logo.svg" width="191"></a>
-      <h2 class="pull-right"><ng-show="tag">{{tag.title}}</ng-show></h2>
-    </div>
-    <!-- fill up the space between left and right area -->
-    <span flex></span>
-    <md-button>button</md-button>
+      <img src="assets/images/logo.svg" width="191">
+      {{tag.title}}
   </div>
 </md-toolbar>
