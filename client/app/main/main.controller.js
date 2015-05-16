@@ -12,9 +12,9 @@ angular.module('fireflyApp')
 	});
 
     $http.jsonp('https://hub.gdgx.io/api/v1/events/stats?callback=JSON_CALLBACK')
-        .success(function(data) {
-          $scope.tags = data.upcoming_top_tags; // jshint ignore:line
-        }
+      .success(function(data) {
+        $scope.tags = data.upcoming_top_tags; // jshint ignore:line
+      }
     );
 
     $scope.distanceFromHere = function (_item, _startPoint) {
@@ -61,21 +61,23 @@ angular.module('fireflyApp')
     };
 
 	var processNextEvent = function(data) {
-		$scope.nextEvent = data.items[0];
-        	$scope.allEvents = data.items;
+    if (data && data.items) {
+      $scope.nextEvent = data.items[0];
+      $scope.allEvents = data.items;
+    }
 	};
 
-	if($scope.prefix) {
+	if ($scope.prefix) {
 		if ($scope.all) {
-      			$http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+$scope.prefix+'?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
+      $http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+$scope.prefix+'?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
 		} else {
 			$http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+$scope.prefix+'/upcoming?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
-    	}
-    }else {
-    		if ($scope.all){
-         		$http.jsonp('https://hub.gdgx.io/api/v1/events?perpage=100&callback=JSON_CALLBACK').success(processNextEvent);
-    		} else {
-    			$http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=100&callback=JSON_CALLBACK').success(processNextEvent);
-    		}
-    	}
-  });
+    }
+  } else {
+    if ($scope.all) {
+        $http.jsonp('https://hub.gdgx.io/api/v1/events?perpage=100&callback=JSON_CALLBACK').success(processNextEvent);
+    } else {
+      $http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=100&callback=JSON_CALLBACK').success(processNextEvent);
+    }
+  }
+});
