@@ -15,6 +15,7 @@ angular.module('fireflyApp', [
   'viewhead',
   'ja.qr'
 ])
+  .constant('GOOGLE_API_KEY', 'AIzaSyD7v04m_bTu-rcWtuaN3fTP9NBmjhB7lXg')
   .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
     $routeProvider
       .otherwise({
@@ -27,13 +28,13 @@ angular.module('fireflyApp', [
         .primaryPalette('grey')
         .accentPalette('indigo');
   })
-  .config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
-        GoogleMapApi.configure({
-            //    key: 'your api key',
+  .config(function (uiGmapGoogleMapApiProvider, GOOGLE_API_KEY) {
+        uiGmapGoogleMapApiProvider.configure({
+            key: GOOGLE_API_KEY,
             v: '3.17',
             libraries: 'weather,geometry,visualization'
         });
-  }])
+  })
   .run(function($rootScope, $geolocation, $http) {
 
     $rootScope.all = window.location.search.indexOf('all') >= 0;
