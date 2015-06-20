@@ -24,7 +24,7 @@ angular.module('fireflyApp', [
     $locationProvider.html5Mode(true);
 
     $mdThemingProvider.theme('default')
-        .primaryPalette('deep-orange')
+        .primaryPalette('grey')
         .accentPalette('indigo');
   })
   .config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
