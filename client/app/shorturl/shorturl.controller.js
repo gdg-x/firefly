@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('ShorturlEventCtrl', function ($scope, $http, $routeParams) {
+  .controller('ShorturlEventCtrl', function ($scope, $http, $routeParams, GOOGLE_API_KEY) {
         $scope.gdgeventsshorturl = '';
         var processEventData = function (data) {
             if (data.geo) {
@@ -20,7 +20,9 @@ angular.module('fireflyApp')
             }
             $scope.event = data;
 
-            $http.get('https://www.googleapis.com/plus/v1/people/' + $scope.event.chapter + '?fields=image&key=AIzaSyD7v04m_bTu-rcWtuaN3fTP9NBmjhB7lXg')
+            var chapterUrl = 'https://www.googleapis.com/plus/v1/people/' + $scope.event.chapter +
+              '?fields=image&key=' + GOOGLE_API_KEY;
+            $http.get(chapterUrl)
               .success(function (data) {
                 $scope.image = data.image.url.replace('sz=50', 'sz=70');
               }
