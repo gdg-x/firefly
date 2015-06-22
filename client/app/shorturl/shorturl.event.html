@@ -2,7 +2,6 @@
 <meta view-head property="og:description" content="{{event.about}}">
 <meta view-head property="og:title" content="{{event.title}}">
 <div layout="column" layout-fill>
-  <div ng-include="'components/navbar/navbar.html'"></div>
   <div layout="row" id="card-box">
     <div hidde show-gt-md flex-gt-md="5"></div>
     <div flex flex-lg="90">
@@ -10,10 +9,10 @@
         <div flex-gt-md="75" flex-sm="100">
           <div flex>
             <md-card>
-              <h3 view-title>{{event.title}} <small><time-ago date="event.start"></time-ago></small></h3>
-              <p>
-              <div ng-bind-html="event.about | linkify"></div>
-              </p>
+              <md-card-content>
+                <h3 view-title>{{event.title}} <small><time-ago date="event.start"></time-ago></small></h3>
+                <div ng-bind-html="event.about | linkify"></div>
+              </md-card-content>
             </md-card>
           </div>
           <div flex>
@@ -32,50 +31,60 @@
           <div layout-sm="column" layout-gt-md="row">
             <div flex class="eiw">
               <md-card>
-                <h3><i class="fa fa-clock-o"></i> Your Time</h3>
-                <p>
-                  <b>Begins:</b> <span><local-time date="event.start"></local-time></span><br/>
-                  <b>Ends:</b> <span><local-time date="event.end"></local-time></span>
-                </p>
+                <md-card-content>
+                  <h3><span class="fa fa-clock-o"></span> Your Time</h3>
+                  <p>
+                    <b>Begins:</b> <span><local-time date="event.start"></local-time></span><br/>
+                    <b>Ends:</b> <span><local-time date="event.end"></local-time></span><br/>
+                    <b>Timezone:</b> Local
+                  </p>
+                </md-card-content>
               </md-card>
             </div>
             <div flex class="eiw">
               <md-card>
-                <h3><i class="fa fa-clock-o"></i> Event Time</h3>
-                <p>
-                  <b>Begins:</b> <span><time-timezone date="event.start" timezone="event.timezone"></time-timezone></span><br/>
-                  <b>Ends:</b> <span><time-timezone date="event.end" timezone="event.timezone"></time-timezone></span><br/>
-                  <b>Timezone:</b> {{event.timezone}}
-                </p>
+                <md-card-content>
+                  <h3><span class="fa fa-clock-o"></span> Event Time</h3>
+                  <p>
+                    <b>Begins:</b> <span><time-timezone date="event.start" timezone="event.timezone"></time-timezone></span><br/>
+                    <b>Ends:</b> <span><time-timezone date="event.end" timezone="event.timezone"></time-timezone></span><br/>
+                    <b>Timezone:</b> {{event.timezone}}
+                  </p>
+                </md-card-content>
               </md-card>
             </div>
             <div flex class="eiw">
               <md-card>
-                <h3><i class="fa fa-map-marker"></i> Location</h3>
-                <p>
-                  {{event.location}}<br/><br/>
-                  <a ng-href="https://maps.google.com/maps?daddr={{event.location}}">Get directions</a>
-                </p>
+                <md-card-content>
+                  <h3><span class="fa fa-map-marker"></span> Location</h3>
+                  <p>
+                    {{event.location}}<br/><br/>
+                    <a ng-href="https://maps.google.com/maps?daddr={{event.location}}">Get directions</a>
+                  </p>
+                </md-card-content>
               </md-card>
             </div>
           </div>
         </div>
         <div flex-gt-md="25" flex-sm="100">
           <md-card>
-            <h3>Hosted by</h3>
-            <p>
+            <md-card-content>
               <img ng-show="chapter._id != undefined" class="pull-right" style="margin-top: 11px;" ng-src="{{image}}"/>
+              <h3>Hosted by</h3>
               <h3><a ng-href="http://developers.google.com/groups/chapter/{{chapter._id}}/">{{chapter.name}}</a></h3>
               <span>{{chapter.city}}, {{chapter.country.name}}</span>
-            </p>
+            </md-card-content>
           </md-card>
           <md-card>
-            <h3>Event site</h3>
-            <p>
-              Short URL to this Site:<br/>
-              <a ng-href="http://gdg.events/{{shorturl.hash}}">http://gdg.events/{{shorturl.hash}}
-                <qr input-mode="'8bit'" size="150" text="gdgeventsshorturl" image="true"></qr>
+            <md-card-content>
+              <a ng-href="http://gdg.events/{{shorturl.hash}}">
+                <qr input-mode="'8bit'" size="150" text="gdgeventsshorturl" image="true" class="pull-right"></qr>
               </a>
+              <h3>Event site</h3>
+              <p>
+                Short URL to this Site:<br/>
+                <a ng-href="http://gdg.events/{{shorturl.hash}}">http://gdg.events/{{shorturl.hash}}</a>
+              </p>
               <div ng-switch on="!!event.eventUrl">
                 <div ng-switch-when="true">
                   <a ng-href="{{event.eventUrl}}">Google+ event page</a>
@@ -83,11 +92,11 @@
                 <div ng-switch-default></div>
               </div>
               <a ng-href="http://developers.google.com/events/{{event._id}}/">Google Developers' event page</a>
-            </p>
+            </md-card-content>
           </md-card>
         </div>
       </div>
     </div>
-    <div hidde show-gt-md flex-gt-md="5"></div>
+    <div show-gt-md flex-gt-md="5"></div>
   </div>
 </div>
