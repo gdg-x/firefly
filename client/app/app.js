@@ -41,7 +41,7 @@ angular.module('fireflyApp', [
     $rootScope.prefix = window.location.hostname.replace('.gdg.events','');
 
     if($rootScope.prefix === window.location.hostname ) {
-       $rootScope.prefix = 'i-oextended';
+       $rootScope.prefix = 'devfest';
     }
 
     if($rootScope.prefix) {
