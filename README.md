@@ -1,5 +1,6 @@
 Firefly
 =======
+[![Build Status](https://travis-ci.org/gdg-x/firefly.png)](https://travis-ci.org/gdg-x/firefly)
 
 This project is to help organizers to better promote their events.
 
