@@ -29,7 +29,7 @@ module.exports = function(config) {
       'client/bower_components/angular-linkify/angular-linkify.js',
       'client/bower_components/angularjs-viewhead/angularjs-viewhead.js',
       'client/bower_components/angular-qr/src/angular-qr.js',
-      'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/bower_components/lodash/lodash.js',
       'client/app/app.js',
       'client/app/**/*.js',
       'client/components/**/*.js',
