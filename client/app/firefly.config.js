@@ -3,10 +3,7 @@
 angular.module('fireflyApp')
   .constant('GOOGLE_API_KEY', 'AIzaSyD7v04m_bTu-rcWtuaN3fTP9NBmjhB7lXg')
   .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
+    $routeProvider.otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode(true);
 
