@@ -81,8 +81,10 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "node server/app.js",
+    "start": "grunt serve",
     "test": "grunt test",
+    "monitor": "nodemon server/app.js",
+    "deploy": "gcloud preview app deploy app.yaml -remote",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
   },
   "private": true
