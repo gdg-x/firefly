@@ -6,7 +6,7 @@ module.exports = function (grunt) {
   var localConfig;
   try {
     localConfig = require('./server/config/local.env');
-  } catch(e) {
+  } catch (e) {
     localConfig = {};
   }
 
@@ -111,7 +111,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Make sure code styles are up to par and there are no obvious mistakes
+    // Static Code Analysis to check that there are no obvious mistakes
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -133,6 +133,20 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '<%= yeoman.client %>/{app,components}/**/*.mock.js'
         ]
+      }
+    },
+
+    // Make sure code styles are up to par
+    jscs: {
+      src: [
+        '**/*.js',
+        '!node_modules/**/*.js',
+        '!client/bower_components/**/*.js',
+        '!.tmp/**/*.js',
+        '!dist/**/*.js'
+      ],
+      options: {
+        config: '.jscsrc'
       }
     },
 
@@ -219,6 +233,10 @@ module.exports = function (grunt) {
             {
               match: /(DOMAIN: ')(.*)(')/g,
               replacement: '$1' + localConfig.DOMAIN + '$3'
+            },
+            {
+              match: /(var DOMAIN = ')(.*)(';)/g,
+              replacement: '$1' + localConfig.DOMAIN + '$3'
             }
           ]
         },
@@ -228,6 +246,12 @@ module.exports = function (grunt) {
             flatten: true,
             src: ['<%= yeoman.client %>/app/firefly.config.js'],
             dest: '<%= yeoman.client %>/app/'
+          },
+          {
+            expand: true,
+            flatten: true,
+            src: ['server/routes.js'],
+            dest: 'server/'
           }
         ]
       }
@@ -624,8 +648,15 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
+  grunt.registerTask('validate', [
+    'jshint',
+    'jscs',
+    'test'
+  ]);
+
   grunt.registerTask('default', [
     'newer:jshint',
+    'jscs',
     'test',
     'build'
   ]);

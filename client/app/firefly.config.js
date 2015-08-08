@@ -12,11 +12,11 @@ angular.module('fireflyApp')
         .accentPalette('indigo');
   })
   .config(function (uiGmapGoogleMapApiProvider, GOOGLE_API_KEY) {
-        uiGmapGoogleMapApiProvider.configure({
-            key: GOOGLE_API_KEY,
-            v: '3.17',
-            libraries: 'weather,geometry,visualization'
-        });
+    uiGmapGoogleMapApiProvider.configure({
+      key: GOOGLE_API_KEY,
+      v: '3.17',
+      libraries: 'weather,geometry,visualization'
+    });
   })
   .service('config', config);
 

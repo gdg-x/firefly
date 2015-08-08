@@ -51,6 +51,7 @@
     "grunt-replace": "0.9.3",
     "grunt-asset-injector": "^0.1.0",
     "grunt-karma": "~0.8.2",
+    "grunt-jscs": "1.8.0",
     "grunt-build-control": "DaftMonk/grunt-build-control",
     "grunt-mocha-test": "~0.10.2",
     "jit-grunt": "^0.5.0",

@@ -4,6 +4,7 @@ describe('Controller: ShorturlEventCtrl', function () {
   var ShorturlEventCtrl, scope;
 
   // load the controller's module
+  //noinspection JSValidateTypes
   beforeEach(module('fireflyApp'));
 
   // Initialize the controller and a mock scope

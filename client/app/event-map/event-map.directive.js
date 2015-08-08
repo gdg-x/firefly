@@ -10,10 +10,10 @@ angular.module('fireflyApp')
         tag: '='
       },
       controller: function($scope) {
-          $scope.map = {
+        $scope.map = {
             center: {
-                latitude: 45,
-                longitude: -73
+              latitude: 45,
+              longitude: -73
             },
             zoom: 5,
             control: {},
@@ -23,7 +23,7 @@ angular.module('fireflyApp')
             options: {scrollwheel: false}
           };
 
-          $scope.markers = [];
+        $scope.markers = [];
 
       },
       link: function (scope) {
@@ -36,17 +36,17 @@ angular.module('fireflyApp')
         });
 
         scope.$watch('position', function(position) {
-          if(position) {
+          if (position) {
             angular.copy(position, scope.map.center);
           }
         });
 
         var processEvents = function(data) {
           var i;
-          for(i = 0; i < data.items.length; i++) {
+          for (i = 0; i < data.items.length; i++) {
             var event = data.items[i];
 
-            if(event.geo) {
+            if (event.geo) {
               var marker = {
                 id: event._id,
                 chapter: event.chapter,
@@ -69,17 +69,19 @@ angular.module('fireflyApp')
               }.bind(marker, marker); // jshint ignore:line
 
               scope.markers.push(marker);
-              if(scope.maps) {
+              if (scope.maps) {
                 scope.maps.event.trigger(scope.map.control.getGMap(), 'resize');
               }
             }
           }
         };
 
-        if(scope.tag) {
-          $http.jsonp('https://hub.gdgx.io/api/v1/events/tag/'+scope.tag+'/upcoming?perpage=1000&callback=JSON_CALLBACK').success(processEvents);
+        if (scope.tag) {
+          $http.jsonp('https://hub.gdgx.io/api/v1/events/tag/' + scope.tag +
+            '/upcoming?perpage=1000&callback=JSON_CALLBACK').success(processEvents);
         } else {
-          $http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=1000&callback=JSON_CALLBACK').success(processEvents);
+          $http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=1000&callback=JSON_CALLBACK')
+            .success(processEvents);
         }
       }
     };

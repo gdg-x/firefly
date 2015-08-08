@@ -3,13 +3,13 @@
 angular.module('fireflyApp')
   .controller('FooterCtrl', function ($scope) {
 
-  	$scope.url = document.URL;
+    $scope.url = document.URL;
 
     $scope.copyUrl = function(e) {
-	    var clip = new ClipboardEvent( 'copy' );
-	    clip.clipboardData.setData( 'text/plain', 'test' );
-	    clip.preventDefault();
+      var clip = new ClipboardEvent('copy');
+      clip.clipboardData.setData('text/plain', 'test');
+      clip.preventDefault();
 
-	    e.target.dispatchEvent( clip );
+      e.target.dispatchEvent(clip);
     };
   });
