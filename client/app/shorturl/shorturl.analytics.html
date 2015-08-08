@@ -1,64 +1,83 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-6">
-			<div class="row">
-				<div class="col-md-3">
-					<img class="pull-right" src="https://chart.googleapis.com/chart?cht=qr&chs=128x128&chl=http://gdg.events/{{shorturl.hash}}"/>
-				</div>
-				<div class="col-md-9">
-					<h2><i class="fa fa-external-link"></i> <a href="http://gdg.events/{{shorturl.hash}}">http://gdg.events/{{shorturl.hash}}</a></h2>
-					<div ng-show="shorturl.event_id">
-						<small>Alt: <a href="http://gdg.events/{{shorturl.event_id}}">http://gdg.events/{{shorturl.event_id}}</a></small><br/>
-						<small>Resolves to <a href="https://hub.gdgx.io/events/{{shorturl.event_id}}">https://hub.gdgx.io/events/{{shorturl.event_id}}</a></small>
-					</div>
-					<div ng-show="shorturl.url">
-						<small>Resolves to <a href="https://hub.gdgx.io/events/{{shorturl.event_id}}">https://hub.gdgx.io/events/{{shorturl.event_id}}</a></small>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<h2 class="pull-right">Total Hits: {{shorturl.hits}}</h2>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Referrers</h3>
-					<div class="card">
-						<div google-chart chart="referrers" id="referrers"></div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Countries</h3>
-					<div class="card">
-						<div google-chart chart="countries" id="countries"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Browsers</h3>
-					<div class="card">
-						<div google-chart chart="browsers" id="browsers"></div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Platforms</h3>
-					<div class="card">
-						<div google-chart chart="platforms" id="platforms"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-3">
+          <img class="pull-right"
+               ng-src="https://chart.googleapis.com/chart?cht=qr&chs=128x128&chl={{ shorturlBase + shorturl.hash}}"/>
+        </div>
+        <div class="col-md-9">
+          <h2><i class="fa fa-external-link"></i>
+            <a ng-href="{{ shorturlBase + shorturl.hash}}">
+              {{ shorturlBase + shorturl.hash}}</a>
+          </h2>
+
+          <div ng-show="shorturl.event_id">
+            <small>Alt:
+              <a ng-href="{{ shorturlBase + shorturl.event_id}}">
+                {{ shorturlBase + shorturl.event_id}}</a>
+            </small>
+            <br/>
+            <small>Resolves to
+              <a href="https://hub.gdgx.io/events/{{shorturl.event_id}}">
+                https://hub.gdgx.io/events/{{shorturl.event_id}}</a>
+            </small>
+          </div>
+          <div ng-show="shorturl.url">
+            <small>Resolves to
+              <a href="https://hub.gdgx.io/events/{{shorturl.event_id}}">
+                https://hub.gdgx.io/events/{{shorturl.event_id}}</a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2 class="pull-right">Total Hits: {{shorturl.hits}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Referrers</h3>
+
+          <div class="card">
+            <div google-chart chart="referrers" id="referrers"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Countries</h3>
+
+          <div class="card">
+            <div google-chart chart="countries" id="countries"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Browsers</h3>
+
+          <div class="card">
+            <div google-chart chart="browsers" id="browsers"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Platforms</h3>
+
+          <div class="card">
+            <div google-chart chart="platforms" id="platforms"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

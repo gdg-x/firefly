@@ -48,6 +48,7 @@
     "grunt-angular-templates": "^0.5.4",
     "grunt-dom-munger": "^3.4.0",
     "grunt-protractor-runner": "^1.1.0",
+    "grunt-replace": "0.9.3",
     "grunt-asset-injector": "^0.1.0",
     "grunt-karma": "~0.8.2",
     "grunt-build-control": "DaftMonk/grunt-build-control",

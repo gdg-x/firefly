@@ -15,33 +15,13 @@ angular.module('fireflyApp', [
   'viewhead',
   'ja.qr'
 ])
-  .constant('GOOGLE_API_KEY', 'AIzaSyD7v04m_bTu-rcWtuaN3fTP9NBmjhB7lXg')
-  .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
-
-    $locationProvider.html5Mode(true);
-
-    $mdThemingProvider.theme('default')
-        .primaryPalette('grey')
-        .accentPalette('indigo');
-  })
-  .config(function (uiGmapGoogleMapApiProvider, GOOGLE_API_KEY) {
-        uiGmapGoogleMapApiProvider.configure({
-            key: GOOGLE_API_KEY,
-            v: '3.17',
-            libraries: 'weather,geometry,visualization'
-        });
-  })
-  .run(function($rootScope, $geolocation, $http) {
+  .run(function($rootScope, $geolocation, $http, config) {
 
     $rootScope.all = window.location.search.indexOf('all') >= 0;
-    $rootScope.prefix = window.location.hostname.replace('.gdg.events','');
+    $rootScope.prefix = window.location.hostname.replace('.' + config.DOMAIN, '');
 
     if($rootScope.prefix === window.location.hostname ) {
-       $rootScope.prefix = 'devfest';
+       $rootScope.prefix = config.DEFAULT_PREFIX;
     }
 
     if($rootScope.prefix) {

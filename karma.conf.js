@@ -1,5 +1,6 @@
 // Karma configuration
 // http://karma-runner.github.io/0.10/config/configuration-file.html
+'use strict';
 
 module.exports = function(config) {
   config.set({
@@ -30,7 +31,8 @@ module.exports = function(config) {
       'client/bower_components/angularjs-viewhead/angularjs-viewhead.js',
       'client/bower_components/angular-qr/src/angular-qr.js',
       'client/bower_components/lodash/lodash.js',
-      'client/app/app.js',
+      'client/app/firefly.module.js',
+      'client/app/firefly.config.js',
       'client/app/**/*.js',
       'client/components/**/*.js',
       'client/app/**/*.html',

@@ -63,7 +63,7 @@
               </div>
               <div>
                 <div style="display: inline-block; padding: 5px;" ng-repeat="(key, value) in tags">
-                  <a href="http://{{key}}.gdg.events/">{{key}} ({{value}})</a>
+                  <a href="http://{{key + '.' + domain}}/">{{key}} ({{value}})</a>
                 </div>
               </div>
             </md-card-content>

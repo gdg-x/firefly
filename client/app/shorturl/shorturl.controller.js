@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('ShorturlEventCtrl', function ($scope, $http, $routeParams, GOOGLE_API_KEY) {
-        $scope.gdgeventsshorturl = '';
+  .controller('ShorturlEventCtrl', function ($scope, $http, $routeParams, config) {
         var processEventData = function (data) {
             if (data.geo) {
                 data.geo.latitude = data.geo.lat;
@@ -21,7 +20,7 @@ angular.module('fireflyApp')
             $scope.event = data;
 
             var chapterUrl = 'https://www.googleapis.com/plus/v1/people/' + $scope.event.chapter +
-              '?fields=image&key=' + GOOGLE_API_KEY;
+              '?fields=image&key=' + config.GOOGLE_API_KEY;
             $http.get(chapterUrl)
               .success(function (data) {
                 $scope.image = data.image.url.replace('sz=50', 'sz=70');
@@ -42,12 +41,12 @@ angular.module('fireflyApp')
         };
         $http.get('/api/shorturl/'+$routeParams.hash).success(function(data) {
             $scope.shorturl = data;
-            $scope.gdgeventsshorturl = 'http://gdg.events/' + data.hash;
+            $scope.gdgeventsshorturl = 'http://' + config.DOMAIN + '/' + data.hash;
             $http.jsonp('https://hub.gdgx.io/api/v1/events/' +
               data.event_id+'?callback=JSON_CALLBACK').success(processEventData); // jshint ignore:line
         });
   })
-  .controller('ShorturlAnalyticsCtrl', function ($scope, $http, $routeParams) {
+  .controller('ShorturlAnalyticsCtrl', function ($scope, $http, $routeParams, config) {
     $scope.referrers = {
     	type: 'PieChart',
     	options: {
@@ -107,8 +106,9 @@ angular.module('fireflyApp')
     };
 
     $http.get('/api/shorturl/'+$routeParams.hash).success(function(data) {
-    	$scope.shorturl = data;
       var i, j, k, l;
+    	$scope.shorturl = data;
+      $scope.shorturlBase = 'http://' + config.DOMAIN + '/';
 
     	for(i = 0; i < $scope.shorturl.referrers.length; i++) {
     		var ref = $scope.shorturl.referrers[i];

@@ -17,7 +17,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     injector: 'grunt-asset-injector',
-    buildcontrol: 'grunt-build-control'
+    buildcontrol: 'grunt-build-control',
+    replace: 'grunt-replace'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -60,7 +61,8 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.js',
           '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
-          '!<%= yeoman.client %>/app/app.js'],
+          '!<%= yeoman.client %>/app/firefly.module.js',
+          '!<%= yeoman.client %>/app/firefly.config.js'],
         tasks: ['injector:scripts']
       },
       injectCss: {
@@ -205,6 +207,28 @@ module.exports = function (grunt) {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
         exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/']
+      }
+    },
+
+    // Replaces specific config strings at build time
+    replace: {
+      dist: {
+        options: {
+          patterns: [
+            {
+              match: /(DOMAIN: ')(.*)(')/g,
+              replacement: '$1' + localConfig.DOMAIN + '$3'
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            src: ['<%= yeoman.client %>/app/firefly.config.js'],
+            dest: '<%= yeoman.client %>/app/'
+          }
+        ]
       }
     },
 
@@ -459,7 +483,8 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
               ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-               '!{.tmp,<%= yeoman.client %>}/app/app.js',
+               '!{.tmp,<%= yeoman.client %>}/app/firefly.module.js',
+                '!{.tmp,<%= yeoman.client %>}/app/firefly.config.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
             ]
@@ -533,11 +558,6 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', function () {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
-  });
-
   grunt.registerTask('test', function(target) {
     if (target === 'server') {
       return grunt.task.run([
@@ -584,6 +604,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'concurrent:dist',
     'injector',
+    'replace',
     'wiredep',
     'useminPrepare',
     'autoprefixer',

@@ -1,15 +1,13 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('MainCtrl', function ($rootScope, $scope, $http) {
-
+  .controller('MainCtrl', function ($rootScope, $scope, $http, config) {
+    $scope.domain = config.DOMAIN;
   	$scope.nearEvent = undefined;
 
-	$rootScope.$watch('geo', function(geo) {
-		if(geo) {
-
-		}
-	});
+    $rootScope.$watch('geo', function(geo) {
+      if(geo) { }
+    });
 
     $http.jsonp('https://hub.gdgx.io/api/v1/events/stats?callback=JSON_CALLBACK')
       .success(function(data) {
