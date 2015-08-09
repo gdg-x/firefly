@@ -23,3 +23,18 @@ automatic_scaling:
 
 env_variables:
   NODE_ENV: production
+  PORT: 80
+  MONGOHQ_URL: mongodb://mongo-db-8s6m/firefly
+  DOMAIN: gdgx-cloud.appspot.com
+
+network:
+  name: gdg-x
+  instance_tag: web
+
+health_check:
+  enable_health_check: True
+  check_interval_sec: 30
+  timeout_sec: 10
+  unhealthy_threshold: 2
+  healthy_threshold: 2
+  restart_threshold: 60

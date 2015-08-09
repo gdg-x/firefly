@@ -9,6 +9,7 @@ module.exports = function (grunt) {
   } catch (e) {
     localConfig = {};
   }
+  var DOMAIN = process.env.DOMAIN || localConfig.DOMAIN || 'localhost';
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
@@ -232,11 +233,11 @@ module.exports = function (grunt) {
           patterns: [
             {
               match: /(DOMAIN: ')(.*)(')/g,
-              replacement: '$1' + localConfig.DOMAIN + '$3'
+              replacement: '$1' + DOMAIN + '$3'
             },
             {
               match: /(var DOMAIN = ')(.*)(';)/g,
-              replacement: '$1' + localConfig.DOMAIN + '$3'
+              replacement: '$1' + DOMAIN + '$3'
             }
           ]
         },
@@ -549,7 +550,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('open', function () {
-    opn('http://' + localConfig.DOMAIN + ':' + process.env.PORT || '9000');
+    opn('http://localhost:9000');
   });
 
   grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
