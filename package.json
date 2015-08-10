@@ -81,7 +81,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "grunt serve:dist",
+    "start": "export PORT=3000;export DOMAIN=gdg.events;grunt serve:dist",
     "test": "grunt test",
     "monitor": "nodemon server/app.js",
     "deploy": "gcloud preview app deploy app.yaml --remote",
