@@ -23,11 +23,13 @@ automatic_scaling:
 
 env_variables:
   NODE_ENV: production
-  PORT: 80
+  PORT: 9000
   MONGOHQ_URL: mongodb://mongo-db-8s6m/firefly
   DOMAIN: gdgx-cloud.appspot.com
 
 network:
+  forwarded_ports:
+  - 80:9000
   name: gdg-x
   instance_tag: web
 
