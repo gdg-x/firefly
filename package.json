@@ -81,7 +81,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "export PORT=3000;export DOMAIN=gdg.events;grunt serve:dist",
+    "start": "sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000;export PORT=3000;export DOMAIN=gdg.events;grunt serve:dist",
     "test": "grunt test",
     "monitor": "nodemon server/app.js",
     "deploy": "gcloud preview app deploy app.yaml --remote",
