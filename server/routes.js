@@ -10,7 +10,7 @@ var hash = require('short-id');
 var geoip = require('geoip-native');
 
 module.exports = function(app) {
-  var DOMAIN = 'localhost';
+  var DOMAIN = 'gdgroups.org';
 
   hash.configure({
     length: 6,
