@@ -26,9 +26,6 @@ module.exports = function(app) {
   app.use(methodOverride());
   app.use(cookieParser());
 
-  /* Include the app engine handlers to respond to start, stop, and health checks. */
-  app.use(require(config.root + '/server/lib/appengine-handlers'), null);
-
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
