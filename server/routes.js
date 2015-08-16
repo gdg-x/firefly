@@ -5,12 +5,18 @@
  */
 var errors = require('./components/errors');
 var request = require('superagent');
-var shortUrl = require('./api/shorturl/shorturl.model');
+var shortUrlModel = require('./api/shorturl/shorturl.model');
 var hash = require('short-id');
 var geoip = require('geoip-native');
+var localConfig;
+try {
+  localConfig = require('./config/local.env');
+} catch (e) {
+  localConfig = {};
+}
 
 module.exports = function(app) {
-  var DOMAIN = 'gdgroups.org';
+  var DOMAIN = localConfig.DOMAIN || 'gdgroups.org';
 
   hash.configure({
     length: 6,
@@ -33,7 +39,7 @@ module.exports = function(app) {
   // All other routes should redirect to the index.html
   app.route('/:hash')
     .get(function(req, res) {
-      shortUrl.findOne({ $or:[ {'hash': req.params.hash }, {'event_id': req.params.hash } ]}, function(err, shortUrl) {
+      shortUrlModel.findOne({ $or:[ {'hash': req.params.hash }, {'event_id': req.params.hash } ]}, function(err, shortUrl) {
         var me = this;
 
         /**
@@ -42,21 +48,24 @@ module.exports = function(app) {
          * @returns {*}
          */
         function handleEventsResponse(err, eventsRes) {
-          if (err || !eventsRes.body._id) {
-            return res.send(404, 'Not found.');
+          if (err || !eventsRes || !eventsRes.body || !eventsRes.body._id) {
+            console.error(err);
+            // If there is an error looking up the shortUrl, just redirect to default prefix.
+            res.redirect(301, 'http://' + DOMAIN);
           }
 
-          shortUrl.create({
+          // Create a new DB entry for this new event shortUrl
+          shortUrlModel.create({
             event_id: eventsRes.body._id,
             chapter_id: eventsRes.body.chapter,
             hash: hash.store(eventsRes.body._id + eventsRes.body.chapter)
-          }, function(err, shortUrl) {
+          }, function(err, newShortUrl) {
             if (err) {
               console.error(err);
-              return res.send(500, 'Uh oh.');
+              return res.send(500, 'Unable to create new shortUrl entry.');
+            } else {
+              redirect(me, req, res, newShortUrl);
             }
-
-            redirect(me, req, res, shortUrl);
           });
         }
 

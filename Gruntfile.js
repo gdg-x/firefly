@@ -236,10 +236,6 @@ module.exports = function (grunt) {
               replacement: '$1' + DOMAIN + '$3'
             },
             {
-              match: /(var DOMAIN = ')(.*)(';)/g,
-              replacement: '$1' + DOMAIN + '$3'
-            },
-            {
               match: /('GOOGLE_API_KEY', ')(.*)(')/g,
               replacement: '$1' + localConfig.GOOGLE_API_KEY + '$3'
             }
@@ -251,12 +247,6 @@ module.exports = function (grunt) {
             flatten: true,
             src: ['<%= yeoman.client %>/app/firefly.config.js'],
             dest: '<%= yeoman.client %>/app/'
-          },
-          {
-            expand: true,
-            flatten: true,
-            src: ['server/routes.js'],
-            dest: 'server/'
           }
         ]
       }

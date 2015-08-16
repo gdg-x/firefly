@@ -1,9 +1,16 @@
 'use strict';
 
 var _ = require('lodash');
-var Shorturl = require('./shorturl.model');
+var shortUrlModel = require('./shorturl.model');
 var hash = require('short-id');
 var request = require('superagent');
+var localConfig;
+try {
+  localConfig = require('../../config/local.env');
+} catch (e) {
+  localConfig = {};
+}
+var DOMAIN = localConfig.DOMAIN || 'gdgroups.org';
 
 hash.configure({
   length: 6,
@@ -11,33 +18,38 @@ hash.configure({
   salt: Math.random
 });
 
-// Get list of shorturls
+// Get list of shortUrls
 exports.index = function(req, res) {
-  Shorturl.find(function (err, shorturls) {
-    if (err) { return handleError(res, err); }
+  shortUrlModel.find(function (err, shorturls) {
+    if (err) {
+      return handleError(res, err);
+    }
     return res.json(200, shorturls);
   });
 };
 
-// Get a single shorturl
+// Get a single shortUrl
 exports.show = function(req, res) {
-  Shorturl.findOne({ $or:[ {'hash': req.params.id }, {'event_id': req.params.id } ]}, function (err, shorturl) {
-    if (err) { return handleError(res, err); }
+  shortUrlModel.findOne({ $or:[ {'hash': req.params.id }, {'event_id': req.params.id } ]}, function (err, shortUrl) {
+    if (err) {
+      return handleError(res, err);
+    }
 
-    if (!shorturl) {
+    if (!shortUrl) {
       request.get('https://hub.gdgx.io/api/v1/events/' + req.params.id, function(err, hubRes) {
-        if (err || !hubRes.body._id) {
-          return res.send(404, 'Not found.');
+        if (err || !hubRes || !hubRes.body || !hubRes.body._id) {
+          // If there is an error looking up the shortUrl, just redirect to default prefix.
+          res.redirect(301, 'http://' + DOMAIN);
         }
 
-        Shorturl.create({
+        shortUrlModel.create({
           event_id: hubRes.body._id,
           chapter_id: hubRes.body.chapter,
           hash: hash.store(hubRes.body._id + hubRes.body.chapter)
         }, function(err, shortUrl) {
           if (err) {
             console.error(err);
-            return res.send(500, 'Uh oh.');
+            return res.send(500, 'Unable to create new shortUrl entry.');
           }
 
           res.jsonp(shortUrl);
@@ -45,45 +57,50 @@ exports.show = function(req, res) {
       });
 
     } else {
-      return res.jsonp(shorturl);
+      return res.jsonp(shortUrl);
     }
   });
 };
 
-// Creates a new shorturl in the DB.
+// Creates a new shortUrl in the DB.
 exports.create = function(req, res) {
-  Shorturl.create(req.body, function(err, shorturl) {
+  shortUrlModel.create(req.body, function(err, shortUrl) {
     if (err) { return handleError(res, err); }
-    return res.json(201, shorturl);
+    return res.json(201, shortUrl);
   });
 };
 
-// Updates an existing shorturl in the DB.
+// Updates an existing shortUrl in the DB.
 exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
-  Shorturl.findById(req.params.id, function (err, shorturl) {
+  shortUrlModel.findById(req.params.id, function (err, shortUrl) {
     if (err) { return handleError(res, err); }
-    if (!shorturl) { return res.send(404); }
-    var updated = _.merge(shorturl, req.body);
+    if (!shortUrl) { return res.send(404); }
+    var updated = _.merge(shortUrl, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, shorturl);
+      return res.json(200, shortUrl);
     });
   });
 };
 
-// Deletes a shorturl from the DB.
+// Deletes a shortUrl from the DB.
 exports.destroy = function(req, res) {
-  Shorturl.findById(req.params.id, function (err, shorturl) {
+  shortUrlModel.findById(req.params.id, function (err, shortUrl) {
     if (err) { return handleError(res, err); }
-    if (!shorturl) { return res.send(404); }
-    shorturl.remove(function(err) {
+    if (!shortUrl) { return res.send(404); }
+    shortUrl.remove(function(err) {
       if (err) { return handleError(res, err); }
       return res.send(204);
     });
   });
 };
 
+/**
+ * @param res
+ * @param err
+ * @returns {*}
+ */
 function handleError(res, err) {
   return res.send(500, err);
 }
