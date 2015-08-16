@@ -2,6 +2,12 @@
 
 var path = require('path');
 var _ = require('lodash');
+var localConfig;
+try {
+  localConfig = require('../local.env');
+} catch (e) {
+  localConfig = {};
+}
 
 // All configurations will extend these options
 // ============================================
@@ -12,14 +18,14 @@ var all = {
   root: path.normalize(__dirname + '/../../..'),
 
   // Server port
-  port: process.env.PORT || 9000,
+  port: localConfig.PORT || process.env.PORT || 9000,
 
   // Should we populate the DB with sample data?
   seedDB: false,
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'firefly-secret'
+    session: localConfig.SESSION_SECRET
   },
 
   // List of user roles

@@ -9,7 +9,7 @@ module.exports = function (grunt) {
   } catch (e) {
     localConfig = {};
   }
-  var DOMAIN = process.env.DOMAIN || localConfig.DOMAIN || 'localhost';
+  var DOMAIN = localConfig.DOMAIN || process.env.DOMAIN || 'localhost';
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
