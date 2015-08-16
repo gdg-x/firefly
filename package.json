@@ -74,8 +74,8 @@
     "karma-phantomjs-launcher": "~0.1.4",
     "karma": "~0.12.9",
     "karma-ng-html2js-preprocessor": "~0.1.0",
-    "supertest": "~0.11.0",
-    "should": "~3.3.1"
+    "supertest": "1.0.1",
+    "should": "7.0.4"
   },
   "engines": {
     "node": ">=0.10.0"

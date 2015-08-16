@@ -22,7 +22,6 @@ module.exports = function(config) {
       'client/bower_components/angular-aria/angular-aria.js',
       'client/bower_components/angular-animate/angular-animate.js',
       'client/bower_components/angular-material/angular-material.js',
-      'client/bower_components/hammerjs/hammer.js',
       'client/bower_components/angular-google-chart/ng-google-chart.js',
       'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -41,8 +40,7 @@ module.exports = function(config) {
 
     preprocessors: {
       '**/*.jade': 'ng-jade2js',
-      '**/*.html': 'html2js',
-      '**/*.coffee': 'coffee'
+      '**/*.html': 'html2js'
     },
 
     ngHtml2JsPreprocessor: {
