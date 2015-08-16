@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .constant('GOOGLE_API_KEY', 'AIzaSyB8TbB56as1AvPp-2GvJrygEREs8BOqZBY')
+  .constant('GOOGLE_API_KEY', 'Set in server/config/local.env.js')
   .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
     $routeProvider.otherwise({ redirectTo: '/' });
 

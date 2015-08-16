@@ -238,6 +238,10 @@ module.exports = function (grunt) {
             {
               match: /(var DOMAIN = ')(.*)(';)/g,
               replacement: '$1' + DOMAIN + '$3'
+            },
+            {
+              match: /('GOOGLE_API_KEY', ')(.*)(')/g,
+              replacement: '$1' + localConfig.GOOGLE_API_KEY + '$3'
             }
           ]
         },
