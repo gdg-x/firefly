@@ -15,7 +15,7 @@ angular.module('fireflyApp', [
   'viewhead',
   'ja.qr'
 ])
-  .run(function($rootScope, $geolocation, $http, config) {
+  .run(function($rootScope, $window, $geolocation, $http, config) {
 
     $rootScope.all = window.location.search.indexOf('all') >= 0;
     $rootScope.prefix = window.location.hostname.replace('.' + config.DOMAIN, '');
@@ -34,7 +34,10 @@ angular.module('fireflyApp', [
           };
         })
         .error(function() {
-          $rootScope.prefix = undefined;
+          // Redirect invalid prefix to base domain.
+          $window.location.href =
+            window.location.hostname.substr($rootScope.prefix.length + 1,
+              window.location.hostname.length);
         });
     }
     $geolocation.watchPosition({
