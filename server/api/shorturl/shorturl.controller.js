@@ -39,7 +39,7 @@ exports.show = function(req, res) {
       request.get('https://hub.gdgx.io/api/v1/events/' + req.params.id, function(err, hubRes) {
         if (err || !hubRes || !hubRes.body || !hubRes.body._id) {
           // If there is an error looking up the shortUrl, just redirect to default prefix.
-          res.redirect(301, 'http://' + DOMAIN);
+          return res.redirect(301, 'http://' + DOMAIN);
         }
 
         shortUrlModel.create({

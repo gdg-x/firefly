@@ -51,7 +51,7 @@ module.exports = function(app) {
           if (err || !eventsRes || !eventsRes.body || !eventsRes.body._id) {
             console.error(err);
             // If there is an error looking up the shortUrl, just redirect to default prefix.
-            res.redirect(301, 'http://' + DOMAIN);
+            return res.redirect(301, 'http://' + DOMAIN);
           }
 
           // Create a new DB entry for this new event shortUrl
