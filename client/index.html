@@ -18,6 +18,7 @@
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
       <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -43,7 +44,7 @@
     </script>
   </head>
   <body>
-    <div ng-include="'components/navbar/navbar.html'"></div>
+    <firefly-top-nav tag="tag"></firefly-top-nav>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -51,7 +52,7 @@
     <!-- application content -->
     <div ng-view flex></div>
 
-    <div ng-include="'components/footer/footer.html'"></div>
+    <firefly-footer tag="tag" layout></firefly-footer>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -59,44 +60,44 @@
     <![endif]-->
 
     <!-- build:js(client) app/vendor.js -->
-      <!-- bower:js -->
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/angular-animate/angular-animate.js"></script>
-      <script src="bower_components/angular-aria/angular-aria.js"></script>
-      <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/angular-route/angular-route.js"></script>
-      <script src="bower_components/angular-material/angular-material.js"></script>
-      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-      <script src="bower_components/angular-google-chart/ng-google-chart.js"></script>
-      <script src="bower_components/lodash/lodash.js"></script>
-      <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
-      <script src="bower_components/ngGeolocation/ngGeolocation.js"></script>
-      <script src="bower_components/moment/moment.js"></script>
-      <script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
-      <script src="bower_components/angular-linkify/angular-linkify.js"></script>
-      <script src="bower_components/angularjs-viewhead/angularjs-viewhead.js"></script>
-      <script src="bower_components/qrcode/lib/qrcode.js"></script>
-      <script src="bower_components/angular-qr/src/angular-qr.js"></script>
-      <!-- endbower -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-google-chart/ng-google-chart.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="bower_components/ngGeolocation/ngGeolocation.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
+    <script src="bower_components/angular-linkify/angular-linkify.js"></script>
+    <script src="bower_components/angularjs-viewhead/angularjs-viewhead.js"></script>
+    <script src="bower_components/qrcode/lib/qrcode.js"></script>
+    <script src="bower_components/angular-qr/src/angular-qr.js"></script>
+    <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,client}) app/app.js -->
-        <script src="app/firefly.module.js"></script>
-        <script src="app/firefly.config.js"></script>
-          <!-- injector:js -->
-          <script src="app/event-map/event-map.directive.js"></script>
-          <script src="app/main/main.controller.js"></script>
-          <script src="app/main/main.js"></script>
-          <script src="app/moments/moment-timezone.js"></script>
-          <script src="app/moments/moments.directive.js"></script>
-          <script src="app/shorturl/shorturl.controller.js"></script>
-          <script src="app/shorturl/shorturl.js"></script>
-          <script src="components/footer/footer.controller.js"></script>
-          <script src="components/navbar/navbar.controller.js"></script>
-          <!-- endinjector -->
-        <!-- endbuild -->
+    <!-- build:js({.tmp,client}) app/app.js -->
+    <script src="app/firefly.module.js"></script>
+    <script src="app/firefly.config.js"></script>
+    <!-- injector:js -->
+    <script src="app/event-map/event-map.directive.js"></script>
+    <script src="app/main/main.controller.js"></script>
+    <script src="app/main/main.js"></script>
+    <script src="app/moments/moment-timezone.js"></script>
+    <script src="app/moments/moments.directive.js"></script>
+    <script src="app/shorturl/shorturl.controller.js"></script>
+    <script src="app/shorturl/shorturl.js"></script>
+    <script src="components/footer/footer.directive.js"></script>
+    <script src="components/topNav/topNav.directive.js"></script>
+    <!-- endinjector -->
+    <!-- endbuild -->
 </body>
 </html>
