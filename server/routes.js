@@ -85,7 +85,7 @@ module.exports = function(app) {
    */
   function redirect(me, req, res, shortUrl) {
     if (shortUrl.event_id) {
-      res.redirect(301, 'http://' + DOMAIN + shortUrl.event_id + '/');
+      res.redirect(301, 'http://' + DOMAIN + '/' + shortUrl.event_id + '/');
     } else {
       res.redirect(301, shortUrl.url);
     }
