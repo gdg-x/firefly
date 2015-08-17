@@ -11,7 +11,7 @@ angular.module('fireflyApp')
       controller: function () {
 
       },
-      link: function (scope, iElement, iAttrs, vm) {
+      link: function (scope) {
         scope.url = document.URL;
         scope.convertHex = convertHex;
 
