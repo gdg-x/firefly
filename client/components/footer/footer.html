@@ -1,13 +1,13 @@
-<div class="footer" layout-fill ng-controller="FooterCtrl">
+<div class="footer" layout-fill ng-style="{'background-color': convertHex(tag.color, 20)}">
     <div class="pull-right form-inline">
      	<input type="text" ng-model="url" class="form-control" readonly style="height:24px">
-      <button ng-click="copyUrl($event)" tooltip="Copy URL to Clipboard" tooltip-trigger="mouseenter"
-              type="button" class="btn btn-default btn-xs">
-        <span class="glyphicon glyphicon-link"></span>
-      </button>
+      <md-button ng-click="copyUrl($event)" class="md-icon-button md-accent">
+        <md-icon aria-label="Copy URL to Clipboard">link</md-icon>
+        <md-tooltip md-direction="top">Copy URL to Clipboard</md-tooltip>
+      </md-button>
     </div>
 	<div class="pull-left">
-	    <p>&copy; 2015 GDG[x] - Project Firefly - <a ng-href="https://github.com/gdg-x/firefly/">About</a></p>
-	    <p>GDG[x] is an independent group; our activities and the opinions expressed on this Page should in no way be linked to Google, the corporation.</p>
+	    <p>&copy; 2015 <a href="https://plus.google.com/101890122124026924066">GDG[x]</a> - <a href="https://github.com/gdg-x/firefly/">Project Firefly</a></p>
+	    <i>GDG[x] is an independent group; our activities and the opinions expressed on this Page should in no way be linked to Google, the corporation.</i>
     </div>
 </div>

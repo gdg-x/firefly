@@ -39,7 +39,8 @@ module.exports = function(app) {
   // All other routes should redirect to the index.html
   app.route('/:hash')
     .get(function(req, res) {
-      shortUrlModel.findOne({ $or:[ {'hash': req.params.hash }, {'event_id': req.params.hash } ]}, function(err, shortUrl) {
+      shortUrlModel.findOne({ $or:[ {'hash': req.params.hash }, {'event_id': req.params.hash } ]},
+        function(err, shortUrl) {
         var me = this;
 
         /**

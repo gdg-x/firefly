@@ -7,12 +7,12 @@ This project is to help organizers to better promote their events.
 It relies on the data stored on the GDG[x] Hub.
 
 **List of events**
-Organizers can use short urls like http://devfest.gdg.events to promote devfests, or http://brussels.gdg.events (to be implemented) to 
-promote events for GDG Brussels.
+Organizers can use short urls like http://devfest.gdgroups.org to promote devfests, or 
+http://brussels.gdgroups.org (to be implemented) to promote events for GDG Brussels.
 
 **Url shortener**
-Furthermore, it can be uses as url shortener like http://gdg.events/ag62fd to direct to the events page.
-The statistics are shown at http://gdg.events/ag62fd/analytics
+Furthermore, it can be used as url shortener like http://gdgroups.org/4363aa to direct to a specific event's page.
+The statistics are shown at http://gdgroups.org/4363aa/analytics
 
 There is no need for organizers to clone this repo or host this project on their servers.
 
@@ -34,16 +34,16 @@ mongod
 grunt serve
 ```
 
-`client` contains an angular.js app to show event maps
+`client` contains the AngularJS app
 `server` contains the logic for the url shortener
 
 Prod Deployment
 ===============
-1. Create `dist` directory in the root folder of the project
-2. Clone the deploy repo of the server into dist
-3. Execute `grunt build`
-4. change into `dist` and add, commit, push the server to deploy repo
-5. check the server at http://gdg.events
+1. `git fetch`
+2. `git pull`
+3. `grunt build`
+4. `nohup npm start &`
+5. Check the server at http://gdgroups.org
 
 
 
