@@ -77,13 +77,13 @@
           </md-card>
           <md-card>
             <md-card-content>
-              <a ng-href="http://gdg.events/{{shorturl.hash}}">
+              <a ng-href="{{gdgeventsshorturl}}">
                 <qr input-mode="'8bit'" size="150" text="gdgeventsshorturl" image="true" class="pull-right"></qr>
               </a>
               <h3>Event site</h3>
               <p>
                 Short URL to this Site:<br/>
-                <a ng-href="http://gdg.events/{{shorturl.hash}}">http://gdg.events/{{shorturl.hash}}</a>
+                <a ng-href="{{gdgeventsshorturl}}">{{gdgeventsshorturl}}</a>
               </p>
               <div ng-switch on="!!event.eventUrl">
                 <div ng-switch-when="true">

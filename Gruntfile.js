@@ -2,12 +2,14 @@
 'use strict';
 
 module.exports = function (grunt) {
+  var opn = require('opn');
   var localConfig;
   try {
     localConfig = require('./server/config/local.env');
-  } catch(e) {
+  } catch (e) {
     localConfig = {};
   }
+  var DOMAIN = localConfig.DOMAIN || process.env.DOMAIN || 'localhost';
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
@@ -17,7 +19,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     injector: 'grunt-asset-injector',
-    buildcontrol: 'grunt-build-control'
+    buildcontrol: 'grunt-build-control',
+    replace: 'grunt-replace'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -60,7 +63,8 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.js',
           '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
-          '!<%= yeoman.client %>/app/app.js'],
+          '!<%= yeoman.client %>/app/firefly.module.js',
+          '!<%= yeoman.client %>/app/firefly.config.js'],
         tasks: ['injector:scripts']
       },
       injectCss: {
@@ -108,7 +112,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Make sure code styles are up to par and there are no obvious mistakes
+    // Static Code Analysis to check that there are no obvious mistakes
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -130,6 +134,20 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '<%= yeoman.client %>/{app,components}/**/*.mock.js'
         ]
+      }
+    },
+
+    // Make sure code styles are up to par
+    jscs: {
+      src: [
+        '**/*.js',
+        '!node_modules/**/*.js',
+        '!client/bower_components/**/*.js',
+        '!.tmp/**/*.js',
+        '!dist/**/*.js'
+      ],
+      options: {
+        config: '.jscsrc'
       }
     },
 
@@ -191,7 +209,7 @@ module.exports = function (grunt) {
             // opens browser on initial server start
             nodemon.on('config:update', function () {
               setTimeout(function () {
-                require('open')('http://localhost:8080/debug?port=5858');
+                opn('http://localhost:8080/debug?port=5858');
               }, 500);
             });
           }
@@ -205,6 +223,32 @@ module.exports = function (grunt) {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
         exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/']
+      }
+    },
+
+    // Replaces specific config strings at build time
+    replace: {
+      dist: {
+        options: {
+          patterns: [
+            {
+              match: /(DOMAIN: ')(.*)(')/g,
+              replacement: '$1' + DOMAIN + '$3'
+            },
+            {
+              match: /('GOOGLE_API_KEY', ')(.*)(')/g,
+              replacement: '$1' + localConfig.GOOGLE_API_KEY + '$3'
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            src: ['<%= yeoman.client %>/app/firefly.config.js'],
+            dest: '<%= yeoman.client %>/app/'
+          }
+        ]
       }
     },
 
@@ -459,7 +503,8 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
               ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-               '!{.tmp,<%= yeoman.client %>}/app/app.js',
+               '!{.tmp,<%= yeoman.client %>}/app/firefly.module.js',
+                '!{.tmp,<%= yeoman.client %>}/app/firefly.config.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
             ]
@@ -498,13 +543,17 @@ module.exports = function (grunt) {
     }, 1500);
   });
 
+  grunt.registerTask('open', function () {
+    opn('http://localhost:9000');
+  });
+
   grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
     this.async();
   });
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
+      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'express-keepalive']);
     }
 
     if (target === 'debug') {
@@ -531,11 +580,6 @@ module.exports = function (grunt) {
       'open',
       'watch'
     ]);
-  });
-
-  grunt.registerTask('server', function () {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
   });
 
   grunt.registerTask('test', function(target) {
@@ -584,6 +628,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'concurrent:dist',
     'injector',
+    'replace',
     'wiredep',
     'useminPrepare',
     'autoprefixer',
@@ -598,8 +643,15 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
+  grunt.registerTask('validate', [
+    'jshint',
+    'jscs',
+    'test'
+  ]);
+
   grunt.registerTask('default', [
     'newer:jshint',
+    'jscs',
     'test',
     'build'
   ]);
