@@ -26,23 +26,22 @@ Discuss [issues](https://github.com/gdg-x/firefly/issues) and [pull requests](ht
 
 Local Development
 =================
-Clone the git repository, then
-```
-bower install
-npm install
-mongod
-grunt serve
-```
+1. Clone the git repository.
+1. Create and customize `server/config/local.env.js` based on `server/config/local.env.sample.js`.
+1. `bower install`
+1. `npm install`
+1. `mongod` or `mongostart` (configured [here](https://github.com/gdg-x/hub/wiki/MongoDB-Config)).
+1. `grunt serve`
 
-`client` contains the AngularJS app
-`server` contains the logic for the url shortener
+* `client` contains the AngularJS app
+* `server` contains the logic for the url shortener
 
 Prod Deployment
 ===============
 1. `git fetch`
 2. `git pull`
 3. `grunt build`
-4. `nohup npm start &`
+4. `nohup npm startProd &`
 5. Check the server at http://gdgroups.org
 
 
