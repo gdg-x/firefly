@@ -81,10 +81,11 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000;export PORT=3000;export DOMAIN=gdgroups.org;grunt serve:dist",
+    "start": "node server/app.js",
+    "startDev": "grunt serve",
+    "startProd": "sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000;export PORT=3000;export DOMAIN=gdgroups.org;grunt serve:dist",
     "test": "grunt test",
     "monitor": "nodemon server/app.js",
-    "deploy": "gcloud preview app deploy app.yaml --remote",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
   },
   "private": true

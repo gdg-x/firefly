@@ -1,31 +1,18 @@
 'use strict';
 
-angular.module('fireflyApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute',
-  'ngMaterial',
-  'ngAria',
-  'ui.bootstrap',
-  'googlechart',
-  'uiGmapgoogle-maps',
-  'ngGeolocation',
-  'linkify',
-  'viewhead',
-  'ja.qr'
-])
-  .run(function($rootScope, $window, $geolocation, $http, config) {
+angular.module('fireflyApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute', 'ngMaterial', 'ngAria',
+  'ui.bootstrap', 'googlechart', 'uiGmapgoogle-maps', 'ngGeolocation', 'linkify', 'viewhead', 'ja.qr'
+]).run(function($rootScope, $window, $geolocation, $http, config) {
 
-    $rootScope.all = window.location.search.indexOf('all') >= 0;
-    $rootScope.prefix = window.location.hostname.replace('.' + config.DOMAIN, '');
+  $rootScope.all = window.location.search.indexOf('all') >= 0;
+  $rootScope.prefix = window.location.host.replace('.' + config.DOMAIN, '');
 
-    if ($rootScope.prefix === window.location.hostname) {
-      $rootScope.prefix = config.DEFAULT_PREFIX;
-    }
+  if ($rootScope.prefix === window.location.host) {
+    $rootScope.prefix = config.DEFAULT_PREFIX;
+  }
 
-    if ($rootScope.prefix) {
-      $http.jsonp('https://hub.gdgx.io/api/v1/tags/' + $rootScope.prefix + '?callback=JSON_CALLBACK')
+  if ($rootScope.prefix) {
+    $http.jsonp('https://hub.gdgx.io/api/v1/tags/' + $rootScope.prefix + '?callback=JSON_CALLBACK')
         .success(function(data) {
           $rootScope.tag = data;
           $rootScope.tagColor = {
@@ -39,14 +26,14 @@ angular.module('fireflyApp', [
             window.location.hostname.substr($rootScope.prefix.length + 1,
               window.location.hostname.length);
         });
-    }
-    $geolocation.watchPosition({
+  }
+  $geolocation.watchPosition({
       timeout: 60000,
       maximumAge: 250,
       enableHighAccuracy: true
     });
 
-    $rootScope.$on('$geolocation.position.changed', function(event, value) {
+  $rootScope.$on('$geolocation.position.changed', function(event, value) {
       if (!$rootScope.geo ||
         (value.coords.latitude !== $rootScope.latitude &&
          value.coords.longitude !== $rootScope.longitude)) {
@@ -57,4 +44,4 @@ angular.module('fireflyApp', [
         };
       }
     });
-  });
+});
