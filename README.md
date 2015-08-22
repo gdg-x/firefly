@@ -28,6 +28,11 @@ Local Development
 =================
 1. Clone the git repository.
 1. Create and customize `server/config/local.env.js` based on `server/config/local.env.sample.js`.
+1. Define the **GOOGLE_API_KEY**: The API key for your project, available from the [Cloud Console](https://cloud.google.com/console)
+  1. Create a new project then go to APIs & Auth->APIs, activate Google+ API.
+  1. Go to APIs & Auth->Credentials. Add Credentials->API key->Browser key->Create (keep `Any referrer allowed` set).
+1. Define the **SESSION_SECRET**: The Client secret for your project, available from the [Cloud Console](https://cloud.google.com/console)
+  1. Go to APIs & Auth->Credentials. Add Credentials->API key->OAuth 2.0 client ID->Web Application->Create.
 1. `bower install`
 1. `npm install`
 1. `mongod` or `mongostart` (configured [here](https://github.com/gdg-x/hub/wiki/MongoDB-Config)).
