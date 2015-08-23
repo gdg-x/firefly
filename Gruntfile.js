@@ -1,15 +1,13 @@
-// Generated on 2014-09-03 using generator-angular-fullstack 2.0.10
-'use strict';
-
 module.exports = function (grunt) {
-  var opn = require('opn');
+  var opn = require('opn'); // jshint ignore:line
   var localConfig;
   try {
     localConfig = require('./server/config/local.env');
   } catch (e) {
     localConfig = {};
   }
-  var DOMAIN = localConfig.DOMAIN || process.env.DOMAIN || 'localhost';
+  const DOMAIN = localConfig.DOMAIN || process.env.DOMAIN || 'localhost';
+  const PORT = localConfig.PORT || process.env.PORT || 9000;
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
@@ -38,7 +36,7 @@ module.exports = function (grunt) {
     },
     express: {
       options: {
-        port: process.env.PORT || 9000
+        port: PORT
       },
       dev: {
         options: {
@@ -50,11 +48,6 @@ module.exports = function (grunt) {
         options: {
           script: 'dist/server/app.js'
         }
-      }
-    },
-    open: {
-      server: {
-        url: 'http://localhost:<%= express.options.port %>'
       }
     },
     watch: {
@@ -199,7 +192,7 @@ module.exports = function (grunt) {
         options: {
           nodeArgs: ['--debug-brk'],
           env: {
-            PORT: process.env.PORT || 9000
+            PORT: PORT
           },
           callback: function (nodemon) {
             nodemon.on('log', function (event) {
@@ -209,7 +202,7 @@ module.exports = function (grunt) {
             // opens browser on initial server start
             nodemon.on('config:update', function () {
               setTimeout(function () {
-                opn('http://localhost:8080/debug?port=5858');
+                opn('http://localhost:' + PORT + '/debug?port=5858');
               }, 500);
             });
           }
@@ -544,7 +537,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('open', function () {
-    opn('http://localhost:9000');
+    opn('http://localhost:' + PORT);
   });
 
   grunt.registerTask('express-keepalive', 'Keep grunt running', function() {

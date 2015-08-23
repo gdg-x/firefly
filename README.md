@@ -26,24 +26,29 @@ Discuss [issues](https://github.com/gdg-x/firefly/issues) and [pull requests](ht
 
 Local Development
 =================
-Clone the git repository, then
-```
-bower install
-npm install
-mongod
-grunt serve
-```
+1. Clone the git repository.
+1. Create and customize `server/config/local.env.js` based on `server/config/local.env.sample.js`.
+1. Define the **GOOGLE_API_KEY**: The API key for your project, available from the [Cloud Console](https://cloud.google.com/console)
+  1. Create a new project then go to APIs & Auth->APIs, activate Google+ API.
+  1. Go to APIs & Auth->Credentials. Add Credentials->API key->Browser key->Create (keep `Any referrer allowed` set).
+1. Define the **SESSION_SECRET**: The Client secret for your project, available from the [Cloud Console](https://cloud.google.com/console)
+  1. Go to APIs & Auth->Credentials. Add Credentials->API key->OAuth 2.0 client ID->Web Application->Create.
+1. `bower install`
+1. `npm install`
+1. `mongod` or `mongostart` (configured [here](https://github.com/gdg-x/hub/wiki/MongoDB-Config)).
+1. `grunt serve`
 
-`client` contains the AngularJS app
-`server` contains the logic for the url shortener
+* `client` contains the AngularJS app
+* `server` contains the logic for the url shortener
 
 Prod Deployment
 ===============
 1. `git fetch`
-2. `git pull`
-3. `grunt build`
-4. `nohup npm start &`
-5. Check the server at http://gdgroups.org
+1. `git pull`
+1. `grunt build`
+1. `npm runScript configProd`
+1. `nohup npm start &`
+1. Check the server at http://gdgroups.org
 
 
 

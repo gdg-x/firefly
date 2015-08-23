@@ -6,14 +6,15 @@
 // You will need to set these on the server you deploy to.
 
 module.exports = {
-  DOMAIN: 'gdgroups.org',
-  SESSION_SECRET: 'INSERT_YOUR_SERVER_OAUTH_SECRET_HERE',
-  GOOGLE_API_KEY: 'INSET_YOUR_API_KEY_HERE',
-  MONGO_URI: 'mongodb://localhost/firefly-dev',
+  // Localhost loopback domain to enable testing of prefixed subdomains locally.
+  DOMAIN: 'localtest.me:9000',
   // Server IP
   SERVER_IP: '127.0.0.1',
   // Server port
   PORT: 9000,
+  SESSION_SECRET: 'INSERT_YOUR_SERVER_OAUTH_SECRET_HERE',
+  GOOGLE_API_KEY: 'INSET_YOUR_API_KEY_HERE',
+  MONGO_URI: 'mongodb://localhost/firefly-dev',
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
 };
