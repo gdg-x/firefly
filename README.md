@@ -44,10 +44,11 @@ Local Development
 Prod Deployment
 ===============
 1. `git fetch`
-2. `git pull`
-3. `grunt build`
-4. `nohup npm runScript startProd &`
-5. Check the server at http://gdgroups.org
+1. `git pull`
+1. `grunt build`
+1. `npm runScript configProd`
+1. `nohup npm start &`
+1. Check the server at http://gdgroups.org
 
 
 
