@@ -1,5 +1,5 @@
 module.exports = function (grunt) {
-  var opn = require('opn');
+  var opn = require('opn'); // jshint ignore:line
   var localConfig;
   try {
     localConfig = require('./server/config/local.env');

@@ -46,7 +46,7 @@ Prod Deployment
 1. `git fetch`
 2. `git pull`
 3. `grunt build`
-4. `nohup npm startProd &`
+4. `nohup npm runScript startProd &`
 5. Check the server at http://gdgroups.org
 
 
