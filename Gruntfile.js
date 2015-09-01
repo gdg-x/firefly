@@ -8,6 +8,7 @@ module.exports = function (grunt) {
   }
   const DOMAIN = localConfig.DOMAIN || process.env.DOMAIN || 'localhost';
   const PORT = localConfig.PORT || process.env.PORT || 9000;
+  const HUB_IP = localConfig.HUB_IP || 'https://hub.gdgx.io/';
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
@@ -227,6 +228,10 @@ module.exports = function (grunt) {
             {
               match: /(DOMAIN: ')(.*)(')/g,
               replacement: '$1' + DOMAIN + '$3'
+            },
+            {
+              match: /(HUB_IP: ')(.*)(')/g,
+              replacement: '$1' + HUB_IP + '$3'
             },
             {
               match: /('GOOGLE_API_KEY', ')(.*)(')/g,

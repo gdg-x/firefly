@@ -12,7 +12,7 @@ angular.module('fireflyApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute'
   }
 
   if ($rootScope.prefix) {
-    $http.jsonp('https://hub.gdgx.io/api/v1/tags/' + $rootScope.prefix + '?callback=JSON_CALLBACK')
+    $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $rootScope.prefix + '?callback=JSON_CALLBACK')
         .success(function(data) {
           $rootScope.tag = data;
           $rootScope.tagColor = {

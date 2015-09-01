@@ -21,14 +21,16 @@
             </small>
             <br/>
             <small>Resolves to
-              <a href="https://hub.gdgx.io/events/{{shorturl.event_id}}">
-                https://hub.gdgx.io/events/{{shorturl.event_id}}</a>
+              <a ng-href="{{ hubIp }}events/{{shorturl.event_id}}">
+                {{ hubIp }}events/{{shorturl.event_id}}
+              </a>
             </small>
           </div>
           <div ng-show="shorturl.url">
             <small>Resolves to
-              <a href="https://hub.gdgx.io/events/{{shorturl.event_id}}">
-                https://hub.gdgx.io/events/{{shorturl.event_id}}</a>
+              <a ng-href="{{ hubIp }}events/{{shorturl.event_id}}">
+                {{ hubIp }}events/{{shorturl.event_id}}
+              </a>
             </small>
           </div>
         </div>
