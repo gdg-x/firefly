@@ -8,14 +8,14 @@ describe('Directive: eventMap', function () {
   beforeEach(module('fireflyApp'));
   //noinspection JSValidateTypes
   beforeEach(module('app/event-map/event-map.html'));
-  beforeEach(inject(function ($rootScope, _$httpBackend_) {
+  beforeEach(inject(function ($rootScope, _$httpBackend_, config) {
     $httpBackend = _$httpBackend_;
     scope = $rootScope.$new();
 
     $httpBackend.expectJSONP(
-      'https://hub.gdgx.io/api/v1/tags/' + scope.prefix + '?callback=JSON_CALLBACK').respond([]);
+      config.HUB_IP + 'api/v1/tags/' + scope.prefix + '?callback=JSON_CALLBACK').respond([]);
     $httpBackend.expectJSONP(
-      'https://hub.gdgx.io/api/v1/events/upcoming?perpage=1000&callback=JSON_CALLBACK').respond([]);
+      config.HUB_IP + 'api/v1/events/upcoming?perpage=1000&callback=JSON_CALLBACK').respond([]);
   }));
 
   it('should make hidden element visible', inject(function ($compile) {

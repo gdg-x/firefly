@@ -11,6 +11,7 @@ try {
   localConfig = {};
 }
 var DOMAIN = localConfig.DOMAIN || 'gdgroups.org';
+var HUB_IP = localConfig.HUB_IP || 'https://hub.gdgx.io/';
 
 hash.configure({
   length: 6,
@@ -36,7 +37,7 @@ exports.show = function(req, res) {
     }
 
     if (!shortUrl) {
-      request.get('https://hub.gdgx.io/api/v1/events/' + req.params.id, function(err, hubRes) {
+      request.get(HUB_IP + 'api/v1/events/' + req.params.id, function(err, hubRes) {
         if (err || !hubRes || !hubRes.body || !hubRes.body._id) {
           // If there is an error looking up the shortUrl, just redirect to default prefix.
           return res.redirect(301, 'http://' + DOMAIN);

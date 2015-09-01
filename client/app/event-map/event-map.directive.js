@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .directive('eventMap', ['$http', 'uiGmapGoogleMapApi', function ($http, uiGmapGoogleMapApi) {
+  .directive('eventMap', function ($http, uiGmapGoogleMapApi, config) {
     return {
       templateUrl: 'app/event-map/event-map.html',
       restrict: 'EA',
@@ -20,7 +20,7 @@ angular.module('fireflyApp')
             cluster: {
               maxZoom: 7
             },
-            options: {scrollwheel: false}
+            options: { scrollwheel: false }
           };
 
         $scope.markers = [];
@@ -77,12 +77,12 @@ angular.module('fireflyApp')
         };
 
         if (scope.tag) {
-          $http.jsonp('https://hub.gdgx.io/api/v1/events/tag/' + scope.tag +
+          $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + scope.tag +
             '/upcoming?perpage=1000&callback=JSON_CALLBACK').success(processEvents);
         } else {
-          $http.jsonp('https://hub.gdgx.io/api/v1/events/upcoming?perpage=1000&callback=JSON_CALLBACK')
+          $http.jsonp(config.HUB_IP + 'api/v1/events/upcoming?perpage=1000&callback=JSON_CALLBACK')
             .success(processEvents);
         }
       }
     };
-  }]);
+  });

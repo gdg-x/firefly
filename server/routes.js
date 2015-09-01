@@ -17,6 +17,7 @@ try {
 
 module.exports = function(app) {
   var DOMAIN = localConfig.DOMAIN || 'gdgroups.org';
+  var HUB_IP = localConfig.HUB_IP || 'https://hub.gdgx.io/';
 
   hash.configure({
     length: 6,
@@ -71,7 +72,7 @@ module.exports = function(app) {
         }
 
         if (!shortUrl) {
-          request.get('https://hub.gdgx.io/api/v1/events/' + req.params.hash, handleEventsResponse);
+          request.get(HUB_IP + 'api/v1/events/' + req.params.hash, handleEventsResponse);
         } else {
           redirect(me, req, res, shortUrl);
         }
