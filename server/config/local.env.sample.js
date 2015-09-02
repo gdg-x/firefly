@@ -12,6 +12,8 @@ module.exports = {
   SERVER_IP: '127.0.0.1',
   // Server port
   PORT: 9000,
+  // Hub Server
+  HUB_IP: 'https://hub.gdgx.io/',
   SESSION_SECRET: 'INSERT_YOUR_SERVER_OAUTH_SECRET_HERE',
   GOOGLE_API_KEY: 'INSET_YOUR_API_KEY_HERE',
   MONGO_URI: 'mongodb://localhost/firefly-dev',
