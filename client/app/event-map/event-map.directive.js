@@ -63,10 +63,8 @@ angular.module('fireflyApp')
               };
 
               marker.onClick = function(marker) {
-                scope.$apply(function() {
-                  marker.show = !marker.show;
-                });
-              }.bind(marker, marker); // jshint ignore:line
+                marker.show = !marker.show;
+              }.bind(marker, marker);
 
               scope.markers.push(marker);
               if (scope.maps) {
