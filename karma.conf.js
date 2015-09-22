@@ -28,7 +28,7 @@ module.exports = function(config) {
       'client/bower_components/ngGeolocation/ngGeolocation.js',
       'client/bower_components/angular-linkify/angular-linkify.js',
       'client/bower_components/angularjs-viewhead/angularjs-viewhead.js',
-      'client/bower_components/angular-qr/src/angular-qr.js',
+      'client/bower_components/devintent-qr/src/angular-qr.js',
       'client/bower_components/lodash/lodash.js',
       'client/app/firefly.module.js',
       'client/app/firefly.config.js',
