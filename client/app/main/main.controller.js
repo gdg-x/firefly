@@ -5,10 +5,6 @@ angular.module('fireflyApp')
     $scope.domain = config.DOMAIN;
     $scope.nearEvent = undefined;
 
-    $rootScope.$watch('geo', function(geo) {
-      if (geo) { }
-    });
-
     $http.jsonp(config.HUB_IP + 'api/v1/events/stats?callback=JSON_CALLBACK')
       .success(function(data) {
         $scope.tags = data.upcoming_top_tags; // jshint ignore:line
