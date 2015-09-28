@@ -34,9 +34,7 @@ angular.module('fireflyApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute'
     });
 
   $rootScope.$on('$geolocation.position.changed', function(event, value) {
-      if (!$rootScope.geo ||
-        (value.coords.latitude !== $rootScope.latitude &&
-         value.coords.longitude !== $rootScope.longitude)) {
+      if (!$rootScope.geo) {
         $rootScope.geo = {
           latitude: value.coords.latitude,
           longitude: value.coords.longitude,
