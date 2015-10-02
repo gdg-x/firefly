@@ -15,14 +15,6 @@ angular.module('fireflyApp')
         scope.url = document.URL;
         scope.convertHex = convertHex;
 
-        scope.copyUrl = function(e) {
-          var clip = new ClipboardEvent('copy');
-          clip.clipboardData.setData('text/plain', 'test');
-          clip.preventDefault();
-
-          e.target.dispatchEvent(clip);
-        };
-
         /**
          * @param hex color
          * @param opacity percentage
