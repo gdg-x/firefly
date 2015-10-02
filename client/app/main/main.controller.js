@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('MainCtrl', function ($rootScope, $scope, $http, config) {
+  .controller('MainCtrl', function ($rootScope, $scope, $http, $location, $window, config) {
     $scope.domain = config.DOMAIN;
     $scope.nearEvent = undefined;
 
@@ -10,6 +10,14 @@ angular.module('fireflyApp')
         $scope.tags = data.upcoming_top_tags; // jshint ignore:line
       }
     );
+
+    $scope.openEvent = function (eventId) {
+      $location.path('/' + eventId);
+    };
+
+    $scope.openTag = function (path) {
+      $window.location.href = 'http://' + path;
+    };
 
     $scope.distanceFromHere = function (_item, _startPoint) {
       var start = null;
