@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .constant('GOOGLE_API_KEY', 'Set in server/config/local.env.js')
+  .constant('GOOGLE_API_KEY', 'AIzaSyB8TbB56as1AvPp-2GvJrygEREs8BOqZBY')
   .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
     $routeProvider.otherwise({ redirectTo: '/' });
 
@@ -23,8 +23,8 @@ angular.module('fireflyApp')
 function config(GOOGLE_API_KEY) {
   return {
     GOOGLE_API_KEY: GOOGLE_API_KEY,
-    HUB_IP: 'https://hub.gdgx.io/',
-    DOMAIN: 'gdgroups.org',
+    HUB_IP: 'http://146.148.62.106/',
+    DOMAIN: 'localtest.me:9000',
     DEFAULT_PREFIX: 'devfest'
   };
 }
