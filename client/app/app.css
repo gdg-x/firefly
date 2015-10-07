@@ -45,3 +45,6 @@
 .footer a:hover {
   text-decoration: underline;
 }
+.md-title, md-card-content > p {
+  margin-left: 16px;
+}

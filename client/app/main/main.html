@@ -60,7 +60,7 @@
         <h3 class="md-title">Popular topics</h3>
         <md-list>
           <md-list-item class="md-2-line" ng-repeat="(key, value) in tags" ng-click="openTag(key + '.' + domain)"
-                        style="display: inline-block; padding: 5px;" >
+                        style="display: inline-block;" >
             <div class="md-list-item-text">
               <h3 style="color: {{ tag.color }}">{{ key }}</h3>
               <p>{{ value }} events</p>
