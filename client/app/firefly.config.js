@@ -24,7 +24,7 @@ function config(GOOGLE_API_KEY) {
   return {
     GOOGLE_API_KEY: GOOGLE_API_KEY,
     HUB_IP: 'https://hub.gdgx.io/',
-    DOMAIN: 'localtest.me:9000',
+    DOMAIN: 'gdgroups.org',
     DEFAULT_PREFIX: 'devfest'
   };
 }
