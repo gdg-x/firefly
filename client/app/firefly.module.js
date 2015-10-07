@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute', 'ngMaterial', 'ngAria',
-  'ui.bootstrap', 'googlechart', 'uiGmapgoogle-maps', 'ngGeolocation', 'linkify', 'viewhead', 'ja.qr'
+  'googlechart', 'uiGmapgoogle-maps', 'ngGeolocation', 'linkify', 'viewhead', 'ja.qr'
 ]).run(function($rootScope, $window, $geolocation, $http, config) {
 
   $rootScope.all = window.location.search.indexOf('all') >= 0;

@@ -6,71 +6,69 @@
 
   <event-map position="geo" tag="prefix"></event-map>
 
-  <div layout id="card-box">
-    <div hidde show-gt-md flex-gt-md="10"></div>
-    <div flex flex-lg="80">
-      <div layout-sm="column" layout-gt-md="row">
-        <div flex>
-          <div ng-show="geo.latitude">
-            <md-card>
-              <md-card-content>
-                <h3><span class="fa fa-map-marker"></span> {{tag.title}} Events near you</h3>
-                <div layout="row" layout-margin>
-                  <div flex="5"></div>
-                  <div flex="95">
-                    <div ng-repeat="event in allEvents | orderBy:distanceFromHere | limitTo:5">
-                      <p>
-                        <a href="/{{event._id}}/">{{event.title}}</a><br/>
-                        {{event.start | date : 'medium' : event.timezone}}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </md-card-content>
-            </md-card>
-          </div>
-          <div ng-show="nextEvent">
-            <md-card>
-              <md-card-content>
-                <h3><span class="fa fa-clock-o"></span> Next {{tag.title}} Events</h3>
-                <div layout="row" layout-margin>
-                  <div flex="5"></div>
-                  <div flex="95">
-                    <div ng-repeat="event in allEvents | orderBy:'start' | limitTo:5">
-                      <p>
-                          <a href="/{{event._id}}/">{{event.title}}</a><br/>
-                          {{event.start | date : 'medium' : event.timezone}}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </md-card-content>
-            </md-card>
-          </div>
-        </div>
-        <div flex>
-          <md-card>
-            <md-card-content>
-              <h3>About {{tag.title}}</h3>
-              <p>{{tag.description}}</p>
-            </md-card-content>
-          </md-card>
-          <md-card>
-            <md-card-content>
-              <div ng-switch="prefix">
-                <h3 ng-switch-when="undefined">Popular upcoming topics</h3>
-                <h3 ng-switch-default>Other Popular upcoming topics</h3>
-              </div>
-              <div>
-                <div style="display: inline-block; padding: 5px;" ng-repeat="(key, value) in tags">
-                  <a href="http://{{key + '.' + domain}}/">{{key}} ({{value}})</a>
-                </div>
-              </div>
-            </md-card-content>
-          </md-card>
-        </div>
-      </div>
-    </div>
-    <div hidde show-gt-md flex-gt-md="10"></div>
+  <div layout layout-margin layout-wrap layout-align="center start" id="card-box">
+
+    <md-card flex-sm="100" flex-gt-sm="45">
+      <md-card-content>
+        <h3 class="md-title">
+          {{tag.title}} Events near you
+        </h3>
+        <md-list ng-if="geo.latitude">
+          <md-list-item class="md-2-line" ng-repeat="event in allEvents | orderBy:distanceFromHere | limitTo:5"
+                        ng-click="openEvent(event._id)">
+            <div class="md-list-item-text">
+                <h3 style="color: {{ tag.color }}">{{ event.title }}</h3>
+                <p>{{event.start | date : 'medium' : event.timezone}}</p>
+            </div>
+          </md-list-item>
+        </md-list>
+        <md-list class="md-2-line" ng-if="!geo.latitude">
+          Waiting for location...
+        </md-list>
+      </md-card-content>
+    </md-card>
+
+    <md-card flex-sm="100" flex-gt-sm="45">
+      <md-card-content>
+        <h3 class="md-title">
+          Upcoming {{tag.title}} Events
+        </h3>
+        <md-list ng-if="nextEvent">
+          <md-list-item class="md-2-line" ng-repeat="event in allEvents | orderBy:'start' | limitTo:5"
+                        ng-click="openEvent(event._id)">
+            <div class="md-list-item-text">
+              <h3 style="color: {{ tag.color }}">{{ event.title }}</h3>
+              <p>{{event.start | date : 'medium' : event.timezone}}</p>
+            </div>
+          </md-list-item>
+        </md-list>
+        <md-list class="md-2-line" ng-if="!nextEvent">
+          No upcoming events in this series.
+        </md-list>
+      </md-card-content>
+    </md-card>
+
+    <md-card flex-sm="100" flex-gt-sm="45">
+      <md-card-content>
+        <h3 class="md-title">About {{tag.title}}</h3>
+        <p>{{tag.description}}</p>
+      </md-card-content>
+    </md-card>
+
+    <md-card flex-sm="100" flex-gt-sm="45">
+      <md-card-content>
+        <h3 class="md-title">Popular topics</h3>
+        <md-list>
+          <md-list-item class="md-2-line" ng-repeat="(key, value) in tags" ng-click="openTag(key + '.' + domain)"
+                        style="display: inline-block;" >
+            <div class="md-list-item-text">
+              <h3 style="color: {{ tag.color }}">{{ key }}</h3>
+              <p>{{ value }} events</p>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+    </md-card>
+
   </div>
 </div>
