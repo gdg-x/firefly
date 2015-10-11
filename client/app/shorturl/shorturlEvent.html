@@ -1,0 +1,121 @@
+<meta view-head property="og:type" content="article">
+<meta view-head property="og:description" content="{{ vm.event.about }}">
+<meta view-head property="og:title" content="{{ vm.event.title }}">
+<div layout="column" layout-fill>
+  <div layout="row" id="card-box">
+    <div hidde show-gt-md flex-gt-md="5"></div>
+    <div flex flex-lg="90">
+
+      <div layout-sm="column" layout-gt-md="row">
+        <md-whiteframe class="md-whiteframe-1dp" flex-gt-md="75" flex-sm="100">
+          <md-toolbar ng-style="{'background-color': vm.convertHex(tag.color, 50)}">
+            <div class="md-toolbar-tools">
+              <h2>
+                <span>
+                  {{ vm.event.title }}
+                  <small>
+                    <time-ago date="vm.event.start"></time-ago>
+                  </small>
+                </span>
+              </h2>
+            </div>
+          </md-toolbar>
+
+          <div ng-show="!!vm.event.geo" flex>
+            <ui-gmap-google-map center="vm.event.geo.center" zoom="vm.event.geo.zoom" options="vm.event.geo.options">
+              <ui-gmap-marker coords="vm.event.geo" idkey="vm.event._id">
+              </ui-gmap-marker>
+            </ui-gmap-google-map>
+            <div ng-hide="!!vm.event.geo">...</div>
+          </div>
+
+          <div layout layout-margin layout-padding>
+            <span ng-bind-html="vm.event.about | linkify"></span>
+          </div>
+
+          <div layout-sm="column" layout-gt-md="row">
+            <div flex class="eiw">
+              <md-card>
+                <md-card-content>
+                  <h3><span class="fa fa-clock-o"></span> Your Time</h3>
+
+                  <p>
+                    <b>Begins:</b> <span><local-time date="vm.event.start"></local-time></span><br/>
+                    <b>Ends:</b> <span><local-time date="vm.event.end"></local-time></span><br/>
+                    <b>Timezone:</b> Local
+                  </p>
+                </md-card-content>
+              </md-card>
+            </div>
+            <div flex class="eiw">
+              <md-card>
+                <md-card-content>
+                  <h3><span class="fa fa-clock-o"></span> Event Time</h3>
+
+                  <p>
+                    <b>Begins:</b>
+                    <span>
+                      <time-timezone date="vm.event.start" timezone="vm.event.timezone"></time-timezone>
+                    </span><br/>
+                    <b>Ends:</b>
+                    <span>
+                      <time-timezone date="vm.event.end" timezone="vm.event.timezone"></time-timezone>
+                    </span><br/>
+                    <b>Timezone:</b> {{ vm.event.timezone }}
+                  </p>
+                </md-card-content>
+              </md-card>
+            </div>
+            <div flex class="eiw">
+              <md-card>
+                <md-card-content>
+                  <h3><span class="fa fa-map-marker"></span> Location</h3>
+
+                  <p>
+                    {{ vm.event.location }}<br/><br/>
+                    <a ng-href="https://maps.google.com/maps?daddr={{ vm.event.location }}">Get directions</a>
+                  </p>
+                </md-card-content>
+              </md-card>
+            </div>
+          </div>
+        </md-whiteframe>
+        <div flex-gt-md="25" flex-sm="100">
+          <md-card>
+            <md-card-content>
+              <img ng-show="vm.chapter._id != undefined" class="pull-right" style="margin-top: 11px;" ng-src="{{ vm.image }}"/>
+
+              <h3>Hosted by</h3>
+
+              <h3><a ng-href="http://developers.google.com/groups/chapter/{{ vm.chapter._id }}/">{{ vm.chapter.name }}</a></h3>
+              <span>{{ vm.chapter.city }}, {{ vm.chapter.country.name }}</span>
+            </md-card-content>
+          </md-card>
+          <md-card>
+            <md-card-content>
+              <a ng-href="{{ vm.gdgeventsshorturl }}">
+                <qr input-mode="'8bit'" size="150" text="vm.gdgeventsshorturl" image="true" class="pull-right"></qr>
+              </a>
+
+              <h3>Event site</h3>
+
+              <p>
+                Short URL to this Site:<br/>
+                <a ng-href="{{ vm.gdgeventsshorturl }}">{{ vm.gdgeventsshorturl }}</a>
+              </p>
+
+              <div ng-switch on="!!vm.event.eventUrl">
+                <div ng-switch-when="true">
+                  <a ng-href="{{ vm.event.eventUrl }}">Google+ event page</a>
+                </div>
+                <div ng-switch-default></div>
+              </div>
+              <a ng-href="http://developers.google.com/events/{{ vm.event._id }}/">Google Developers' event page</a>
+            </md-card-content>
+          </md-card>
+        </div>
+      </div>
+    </div>
+    <div show-gt-md flex-gt-md="5"></div>
+  </div>
+</div>

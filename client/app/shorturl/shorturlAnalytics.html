@@ -1,35 +1,33 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
 <div class="container">
   <div class="row">
     <div class="col-md-6">
       <div class="row">
         <div class="col-md-3">
           <img class="pull-right"
-               ng-src="https://chart.googleapis.com/chart?cht=qr&chs=128x128&chl={{ shorturlBase + shorturl.hash}}"/>
+               ng-src="https://chart.googleapis.com/chart?cht=qr&chs=128x128&chl={{ vm.shorturlBase + vm.shorturl.hash}}"/>
         </div>
         <div class="col-md-9">
           <h2><i class="fa fa-external-link"></i>
-            <a ng-href="{{ shorturlBase + shorturl.hash}}">
-              {{ shorturlBase + shorturl.hash}}</a>
+            <a ng-href="{{ vm.shorturlBase + vm.shorturl.hash }}">
+              {{ vm.shorturlBase + vm.shorturl.hash }}</a>
           </h2>
 
-          <div ng-show="shorturl.event_id">
+          <div ng-show="vm.shorturl.event_id">
             <small>Alt:
-              <a ng-href="{{ shorturlBase + shorturl.event_id}}">
-                {{ shorturlBase + shorturl.event_id}}</a>
+              <a ng-href="{{ vm.shorturlBase + vm.shorturl.event_id }}">
+                {{ vm.shorturlBase + vm.shorturl.event_id }}</a>
             </small>
             <br/>
             <small>Resolves to
-              <a ng-href="{{ hubIp }}events/{{shorturl.event_id}}">
-                {{ hubIp }}events/{{shorturl.event_id}}
+              <a ng-href="{{ hubIp }}events/{{ vm.shorturl.event_id }}">
+                {{ hubIp }}events/{{ vm.shorturl.event_id }}
               </a>
             </small>
           </div>
-          <div ng-show="shorturl.url">
+          <div ng-show="vm.shorturl.url">
             <small>Resolves to
-              <a ng-href="{{ hubIp }}events/{{shorturl.event_id}}">
-                {{ hubIp }}events/{{shorturl.event_id}}
+              <a ng-href="{{ hubIp }}events/{{ vm.shorturl.event_id }}">
+                {{ hubIp }}events/{{ vm.shorturl.event_id }}
               </a>
             </small>
           </div>
@@ -37,7 +35,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <h2 class="pull-right">Total Hits: {{shorturl.hits}}</h2>
+      <h2 class="pull-right">Total Hits: {{ vm.shorturl.hits }}</h2>
     </div>
   </div>
   <div class="row">
@@ -47,7 +45,7 @@
           <h3>Referrers</h3>
 
           <div class="card">
-            <div google-chart chart="referrers" id="referrers"></div>
+            <div google-chart chart="vm.referrers" id="referrers"></div>
           </div>
         </div>
       </div>
@@ -56,7 +54,7 @@
           <h3>Countries</h3>
 
           <div class="card">
-            <div google-chart chart="countries" id="countries"></div>
+            <div google-chart chart="vm.countries" id="countries"></div>
           </div>
         </div>
       </div>
@@ -67,7 +65,7 @@
           <h3>Browsers</h3>
 
           <div class="card">
-            <div google-chart chart="browsers" id="browsers"></div>
+            <div google-chart chart="vm.browsers" id="browsers"></div>
           </div>
         </div>
       </div>
@@ -76,7 +74,7 @@
           <h3>Platforms</h3>
 
           <div class="card">
-            <div google-chart chart="platforms" id="platforms"></div>
+            <div google-chart chart="vm.platforms" id="platforms"></div>
           </div>
         </div>
       </div>
