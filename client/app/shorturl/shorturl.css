@@ -14,6 +14,21 @@
 .event-text {
   padding-left: 14px;
 }
+.event-text a {
+  text-decoration: none;
+}
+.event-text a:hover {
+  text-decoration: underline;
+}
 .event-info .chapter-name {
   font-weight: 500;
+}
+.event-description {
+  text-align: center;
+}
+.event-description a {
+  text-decoration: none;
+}
+.event-description a:hover {
+  text-decoration: underline;
 }

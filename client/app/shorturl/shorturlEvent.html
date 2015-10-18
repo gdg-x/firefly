@@ -6,7 +6,7 @@
 
   <div layout layout-margin layout-padding layout-align="center center" layout-wrap>
     <h1 flex="100" style="text-align: center">{{ vm.event.title }}</h1>
-    <span ng-bind-html="vm.event.about | linkify" style="text-align: center" flex-gt-md="80"></span>
+    <span class="event-description" ng-bind-html="vm.event.about | linkify" flex-gt-md="80"></span>
 
     <div class="event-info" flex-sm="100" flex-md="60" flex-gt-md="40">
       <img ng-show="vm.chapter._id != undefined" class="event-info-image" ng-src="{{ vm.image }}"/>
@@ -26,7 +26,8 @@
         <qr input-mode="'8bit'" size="70" text="vm.gdgeventsshorturl" image="true" class="event-info-image"></qr>
       </a>
       <h4>
-        <md-icon class="material-icons" aria-label="Event Site">web</md-icon>
+        <a ng-href="{{ vm.gdgeventsshorturl }}/analytics">
+          <md-icon class="material-icons" aria-label="Event Site">web</md-icon></a>
         Event site
       </h4>
       <div class="event-text">
