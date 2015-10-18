@@ -4,11 +4,13 @@ angular.module('fireflyApp')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/:hash/analytics', {
-        templateUrl: 'app/shorturl/shorturl.analytics.html',
-        controller: 'ShorturlAnalyticsCtrl'
+        templateUrl: 'app/shorturl/shorturlAnalytics.html',
+        controller: 'ShorturlAnalyticsCtrl',
+        controllerAs: 'vm'
       })
       .when('/:hash/', {
-        templateUrl: 'app/shorturl/shorturl.event.html',
-        controller: 'ShorturlEventCtrl'
+        templateUrl: 'app/shorturl/shorturlEvent.html',
+        controller: 'ShorturlEventCtrl',
+        controllerAs: 'vm'
       });
   });
