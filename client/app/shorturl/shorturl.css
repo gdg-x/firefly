@@ -1,0 +1,19 @@
+.event-info {
+  margin: 16px 16px 0 16px;
+  height: 160px;
+  max-width: 600px !important;
+}
+#event-card-container md-card {
+  height: 170px;
+  width: 400px;
+}
+.event-info-image {
+  margin-top: 16px;
+  float: right;
+}
+.event-text {
+  padding-left: 14px;
+}
+.event-info .chapter-name {
+  font-weight: 500;
+}
