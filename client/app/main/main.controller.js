@@ -28,6 +28,10 @@ angular.module('fireflyApp')
       $window.location.href = 'http://' + path;
     };
 
+    $scope.openTagList = function () {
+      $window.location.href = 'http://' + config.DOMAIN + '/tags/active';
+    };
+
     $scope.distanceFromHere = function (_item, _startPoint) {
       var start = null;
 
