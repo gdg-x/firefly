@@ -7,8 +7,11 @@ angular.module('fireflyApp')
 
     if ($routeParams.tag) {
       $scope.prefix = $routeParams.tag;
-      $rootScope.tag = $routeParams.tag;
       $scope.all = false;
+      $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $routeParams.tag + '?callback=JSON_CALLBACK')
+      .success(function (data) {
+        $scope.tag = data;
+      });
     }
 
     $http.jsonp(config.HUB_IP + 'api/v1/events/stats?callback=JSON_CALLBACK')
