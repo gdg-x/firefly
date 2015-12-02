@@ -50,7 +50,7 @@ module.exports = function(app) {
             // If there is an error looking up the shortUrl, just redirect to default prefix.
             return res.redirect(301, 'http://' + DOMAIN);
           }
-          redirect(me, req, res, 'http://' + DOMAIN + '/' + tagsRes.body._id + '/events');
+          res.redirect(301, 'http://' + DOMAIN + '/' + tagsRes.body._id + '/events');
         }
         /**
          * @param err
@@ -61,6 +61,7 @@ module.exports = function(app) {
           if (err || !eventsRes || !eventsRes.body || !eventsRes.body._id) {
             if (err && err.status == 404) {
               request.get(HUB_IP + 'api/v1/tags/' + req.params.hash, handleTagsResponse);
+              return;
             } else {
               console.error(err);
               // If there is an error looking up the shortUrl, just redirect to default prefix.
