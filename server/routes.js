@@ -44,6 +44,14 @@ module.exports = function(app) {
         function(err, shortUrl) {
         var me = this;
 
+        function handleTagsResponse(err, tagsRes) {
+          if (err || !tagsRes || !tagsRes.body || !tagsRes.body._id) {
+            console.error(err);
+            // If there is an error looking up the shortUrl, just redirect to default prefix.
+            return res.redirect(301, 'http://' + DOMAIN);
+          }
+          redirect(me, req, res, 'http://' + DOMAIN + '/' + tagsRes.body._id + '/events');
+        }
         /**
          * @param err
          * @param eventsRes
@@ -51,9 +59,13 @@ module.exports = function(app) {
          */
         function handleEventsResponse(err, eventsRes) {
           if (err || !eventsRes || !eventsRes.body || !eventsRes.body._id) {
-            console.error(err);
-            // If there is an error looking up the shortUrl, just redirect to default prefix.
-            return res.redirect(301, 'http://' + DOMAIN);
+            if (err && err.status == 404) {
+              request.get(HUB_IP + 'api/v1/tags/' + req.params.hash, handleTagsResponse);
+            } else {
+              console.error(err);
+              // If there is an error looking up the shortUrl, just redirect to default prefix.
+              return res.redirect(301, 'http://' + DOMAIN);
+            }
           }
 
           // Create a new DB entry for this new event shortUrl
@@ -87,7 +99,7 @@ module.exports = function(app) {
    */
   function redirect(me, req, res, shortUrl) {
     if (shortUrl.event_id) {
-      res.redirect(301, 'http://' + DOMAIN + '/' + shortUrl.event_id + '/');
+      res.redirect(301, 'http://' + DOMAIN + '/event/' + shortUrl.event_id + '/');
     } else {
       res.redirect(301, shortUrl.url);
     }
