@@ -7,7 +7,7 @@ var errors = require('./components/errors');
 var request = require('superagent');
 var shortUrlModel = require('./api/shorturl/shorturl.model');
 var hash = require('short-id');
-var geoip = require('geoip-native');
+var geoip = require('devintent-geoip-native');
 var localConfig;
 try {
   localConfig = require('./config/local.env');
