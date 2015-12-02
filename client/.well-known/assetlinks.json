@@ -1,0 +1,18 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "org.gdg.frisbee.android",
+    "sha256_cert_fingerprints":
+    ["BE:08:3F:53:18:E4:17:FB:D3:21:25:3A:6D:F9:38:D5:F4:48:4B:6E:FF:1B:70:F1:14:0C:69:71:5E:6B:96:0F"]
+  }
+},
+ {
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "org.gdg.frisbee.android.debug",
+    "sha256_cert_fingerprints":
+    ["61:45:49:E5:3D:F0:99:BB:92:C7:E6:5A:79:14:78:0B:60:8C:9A:75:2E:00:32:44:83:37:3D:C4:90:38:D3:7A"]
+  }
+}]
