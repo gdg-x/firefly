@@ -1,34 +1,34 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('MainCtrl', function ($rootScope, $routeParams, $scope, $http, $location, $window, config) {
-    $scope.domain = config.DOMAIN;
-    $scope.nearEvent = undefined;
+  .controller('MainCtrl', function ($rootScope, $filter, $routeParams, $http, $location, $window, config) {
+    var vm = this;
+    vm.domain = config.DOMAIN;
 
     if ($routeParams.tag) {
-      $scope.prefix = $routeParams.tag;
-      $scope.all = false;
+      vm.prefix = $routeParams.tag;
+      vm.all = false;
       $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $routeParams.tag + '?callback=JSON_CALLBACK')
       .success(function (data) {
-        $scope.tag = data;
+        vm.tag = data;
       });
     }
 
     $http.jsonp(config.HUB_IP + 'api/v1/events/stats?callback=JSON_CALLBACK')
       .success(function(data) {
-        $scope.tags = data.upcoming_top_tags; // jshint ignore:line
+        vm.tags = data.upcoming_top_tags; // jshint ignore:line
       }
     );
 
-    $scope.openEvent = function (eventId) {
+    vm.openEvent = function (eventId) {
       $location.path('/event/' + eventId);
     };
 
-    $scope.openTag = function (path) {
-      $window.location.href = 'http://' + path;
+    vm.openTag = function (path) {
+      $location.path(path + '/events/');
     };
 
-    $scope.distanceFromHere = function (_item, _startPoint) {
+    function distanceFromHere(_item, _startPoint) {
       var start = null;
 
       if (!_item.geo) {
@@ -69,25 +69,26 @@ angular.module('fireflyApp')
 
       var num = radiansTo(start, end) * 3958.8;
       return Math.round(num * 100) / 100;
-    };
+    }
 
     var processNextEvent = function(data) {
       if (data && data.items) {
-        $scope.nextEvent = data.items[0];
-        $scope.allEvents = data.items;
+        vm.nextEvent = data.items[0];
+        vm.nearEvents = $filter('orderBy')(data.items, distanceFromHere);
+        vm.nextEvents = $filter('orderBy')(data.items, 'start');
       }
     };
 
-    if ($scope.prefix) {
-      if ($scope.all) {
-        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + $scope.prefix +
+    if (vm.prefix) {
+      if (vm.all) {
+        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + vm.prefix +
           '?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
       } else {
-        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + $scope.prefix +
+        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + vm.prefix +
           '/upcoming?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
       }
     } else {
-      if ($scope.all) {
+      if (vm.all) {
         $http.jsonp(config.HUB_IP + 'api/v1/events?perpage=100&callback=JSON_CALLBACK')
           .success(processNextEvent);
       } else {

@@ -1,18 +1,15 @@
 .thing-form {
     margin: 20px 0;
 }
-
 #banner {
     border-bottom: none;
     margin-top: -20px;
 }
-
 #banner h1 {
     font-size: 60px;
     line-height: 1;
     letter-spacing: -1px;
 }
-
 .hero-unit {
     position: relative;
     padding: 30px 15px;
@@ -21,11 +18,9 @@
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
     background: #4393B9;
 }
-
 #card-box {
-  margin-top: 15px;
+  margin-top: 16px;
 }
-
-md-card {
-  margin-top: 15px;
+.eventListContainer {
+  height: 400px;
 }

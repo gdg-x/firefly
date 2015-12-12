@@ -33,9 +33,9 @@ module.exports = function(config) {
       'client/app/firefly.module.js',
       'client/app/firefly.config.js',
       'client/app/**/*.js',
-      'client/components/**/*.js',
+      'client/app/components/**/*.js',
       'client/app/**/*.html',
-      'client/components/**/*.html'
+      'client/app/components/**/*.html'
     ],
 
     preprocessors: {
