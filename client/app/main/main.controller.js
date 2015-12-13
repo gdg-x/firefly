@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('MainCtrl', function ($rootScope, $filter, $routeParams, $http, $location, $window, config) {
+  .controller('MainCtrl', function ($rootScope, $filter, $scope, $routeParams, $http, $location, $window, config) {
     var vm = this;
     vm.domain = config.DOMAIN;
 
     if ($routeParams.tag) {
-      vm.prefix = $routeParams.tag;
+      $scope.prefix = $routeParams.tag;
       vm.all = false;
       $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $routeParams.tag + '?callback=JSON_CALLBACK')
       .success(function (data) {
@@ -79,12 +79,12 @@ angular.module('fireflyApp')
       }
     };
 
-    if (vm.prefix) {
+    if ($scope.prefix) {
       if (vm.all) {
-        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + vm.prefix +
+        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + $scope.prefix +
           '?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
       } else {
-        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + vm.prefix +
+        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + $scope.prefix +
           '/upcoming?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
       }
     } else {

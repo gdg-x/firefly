@@ -7,7 +7,7 @@ describe('Directive: eventMap', function () {
   //noinspection JSValidateTypes
   beforeEach(module('fireflyApp'));
   //noinspection JSValidateTypes
-  beforeEach(module('app/event-map/event-map.html'));
+  beforeEach(module('app/components/event-map/event-map.html'));
   beforeEach(inject(function ($rootScope, _$httpBackend_, config) {
     $httpBackend = _$httpBackend_;
     scope = $rootScope.$new();

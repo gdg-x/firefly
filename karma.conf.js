@@ -7,7 +7,7 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
-    // testing framework to use (jasmine/mocha/qunit/...)
+    // testing framework to use (jasmine/mocha)
     frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
@@ -33,9 +33,7 @@ module.exports = function(config) {
       'client/app/firefly.module.js',
       'client/app/firefly.config.js',
       'client/app/**/*.js',
-      'client/app/components/**/*.js',
-      'client/app/**/*.html',
-      'client/app/components/**/*.html'
+      'client/app/**/*.html'
     ],
 
     preprocessors: {
