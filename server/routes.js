@@ -59,7 +59,7 @@ module.exports = function(app) {
          */
         function handleEventsResponse(err, eventsRes) {
           if (err || !eventsRes || !eventsRes.body || !eventsRes.body._id) {
-            if (err && err.status == 404) {
+            if (err && err.status === 404) {
               request.get(HUB_IP + 'api/v1/tags/' + req.params.hash, handleTagsResponse);
               return;
             } else {
