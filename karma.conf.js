@@ -12,7 +12,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'client/bower_components/jquery/dist/jquery.js',
       'client/bower_components/angular/angular.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       'client/bower_components/angular-resource/angular-resource.js',
@@ -24,7 +23,6 @@ module.exports = function(config) {
       'client/bower_components/angular-material/angular-material.js',
       'client/bower_components/angular-google-chart/ng-google-chart.js',
       'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
-      'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/ngGeolocation/ngGeolocation.js',
       'client/bower_components/angular-linkify/angular-linkify.js',
       'client/bower_components/angularjs-viewhead/angularjs-viewhead.js',
