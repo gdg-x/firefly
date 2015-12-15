@@ -1,16 +1,20 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('MainCtrl', function ($rootScope, $filter, $scope, $routeParams, $http, $location, $window, config) {
+  .controller('MainCtrl', function ($rootScope, $filter, $routeParams, $http, $location, $window, config) {
     var vm = this;
     vm.domain = config.DOMAIN;
 
     if ($routeParams.tag) {
-      $scope.prefix = $routeParams.tag;
+      $rootScope.prefix = $routeParams.tag;
       vm.all = false;
-      $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $routeParams.tag + '?callback=JSON_CALLBACK')
-      .success(function (data) {
-        vm.tag = data;
+      $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $rootScope.prefix + '?callback=JSON_CALLBACK')
+        .success(function (data) {
+        $rootScope.tag = data;
+        $rootScope.tagColor = {
+            'background-color': $rootScope.tag.color,
+            height: '4px'
+          };
       });
     }
 
@@ -79,12 +83,12 @@ angular.module('fireflyApp')
       }
     };
 
-    if ($scope.prefix) {
+    if ($rootScope.prefix) {
       if (vm.all) {
-        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + $scope.prefix +
+        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + $rootScope.prefix +
           '?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
       } else {
-        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + $scope.prefix +
+        $http.jsonp(config.HUB_IP + 'api/v1/events/tag/' + $rootScope.prefix +
           '/upcoming?perpage=999&callback=JSON_CALLBACK').success(processNextEvent);
       }
     } else {
