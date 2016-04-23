@@ -20,7 +20,10 @@ angular.module('fireflyApp')
             cluster: {
               maxZoom: 7
             },
-            options: { scrollwheel: false }
+            options: {
+              scrollwheel: false,
+              draggable: true
+            }
           };
 
         $scope.markers = [];
