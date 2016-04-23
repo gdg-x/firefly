@@ -15,7 +15,7 @@
         </h3>
         <md-list ng-if="geo.latitude">
           <md-list-item class="md-2-line" ng-repeat="event in vm.nearEvents | limitTo:5"
-                        ng-click="openEvent(event._id)">
+                        ng-click="vm.openEvent(event._id)">
             <div class="md-list-item-text">
                 <h3 style="color: {{ ::tag.color }}">{{ ::event.title }}</h3>
                 <p>{{ ::event.start | date : 'medium' : event.timezone }}</p>
