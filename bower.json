@@ -13,7 +13,7 @@
     "angular-route": "1.4.8",
     "angular-material": "1.0.0-rc5",
     "angular-google-chart": "0.0.11",
-    "angular-google-maps": "2.1.5",
+    "angular-google-maps": "2.3.2",
     "font-awesome": "4.3.0",
     "ngGeolocation": "0.0.7",
     "lodash": "3.9.3",
