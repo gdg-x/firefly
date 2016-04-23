@@ -29,6 +29,7 @@ module.exports = function(config) {
       'client/bower_components/angular-linkify/angular-linkify.js',
       'client/bower_components/angularjs-viewhead/angularjs-viewhead.js',
       'client/bower_components/devintent-qr/src/angular-qr.js',
+      'client/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
       'client/bower_components/lodash/lodash.js',
       'client/app/firefly.module.js',
       'client/app/firefly.config.js',
