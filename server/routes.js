@@ -16,7 +16,7 @@ try {
 }
 
 module.exports = function(app) {
-  var DOMAIN = localConfig.DOMAIN || 'gdgroups.org';
+  var DOMAIN = localConfig.DOMAIN || 'gdg.events';
   var HUB_IP = localConfig.HUB_IP || 'https://hub.gdgx.io/';
 
   hash.configure({
