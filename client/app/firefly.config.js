@@ -47,7 +47,7 @@ angular.module('fireflyApp')
   .config(function (uiGmapGoogleMapApiProvider, GOOGLE_API_KEY) {
     uiGmapGoogleMapApiProvider.configure({
       key: GOOGLE_API_KEY,
-      v: '3.17',
+      v: '3.23',
       libraries: 'weather,geometry,visualization'
     });
   })
@@ -57,7 +57,7 @@ function config(GOOGLE_API_KEY) {
   return {
     GOOGLE_API_KEY: GOOGLE_API_KEY,
     HUB_IP: 'https://hub.gdgx.io/',
-    DOMAIN: 'gdgroups.org',
-    DEFAULT_PREFIX: 'devfest'
+    DOMAIN: 'gdg.events',
+    DEFAULT_PREFIX: 'ioextended'
   };
 }

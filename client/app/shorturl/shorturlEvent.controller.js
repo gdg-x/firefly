@@ -12,25 +12,29 @@ angular.module('fireflyApp')
         data.event_id + '?callback=JSON_CALLBACK').success(processEventData); // jshint ignore:line
     });
 
-    function processEventData(data) {
-      if (data.geo) {
-        data.geo.latitude = data.geo.lat;
-        data.geo.longitude = data.geo.lng;
-        data.geo.zoom = 11;
-        data.geo.options = { scrollwheel: false };
-        data.geo.center = {
-          latitude: data.geo.latitude,
-          longitude: data.geo.longitude
+    function processEventData(eventData) {
+      if (eventData.geo) {
+        eventData.geo.center = {
+          latitude: eventData.geo.lat,
+          longitude: eventData.geo.lng
         };
-        delete data.geo.lat;
-        delete data.geo.lng;
+        // Specified separately from the center, as the center can change if the map is dragged/panned.
+        eventData.geo.location = {
+          latitude: eventData.geo.lat,
+          longitude: eventData.geo.lng
+        };
+        eventData.geo.zoom = 11;
+        eventData.geo.control = {};
+        eventData.geo.options = {
+          scrollwheel: false,
+          draggable: false
+        };
       }
-      vm.event = data;
+      vm.event = eventData;
       vm.hubIp = config.HUB_IP;
 
       var chapterUrl = 'https://www.googleapis.com/plus/v1/people/' + vm.event.chapter +
         '?fields=image&key=' + config.GOOGLE_API_KEY;
-
       $http.get(chapterUrl)
         .success(function (data) {
           vm.image = data.image.url.replace('sz=50', 'sz=70');
@@ -38,14 +42,8 @@ angular.module('fireflyApp')
       );
 
       $http.jsonp(config.HUB_IP + 'api/v1/chapters/' + vm.event.chapter + '?callback=JSON_CALLBACK')
-        .success(function (data) {
-          if (data.geo) {
-            data.geo.latitude = data.geo.lat;
-            data.geo.longitude = data.geo.lng;
-            delete data.geo.lat;
-            delete data.geo.lng;
-          }
-          vm.chapter = data;
+        .success(function (chapterData) {
+          vm.chapter = chapterData;
         }
       );
     }

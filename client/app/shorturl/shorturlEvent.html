@@ -46,12 +46,12 @@
     </div>
   </div>
 
-  <div ng-show="!!vm.event.geo" flex>
-    <ui-gmap-google-map center="vm.event.geo.center" zoom="vm.event.geo.zoom" options="vm.event.geo.options">
-      <ui-gmap-marker coords="vm.event.geo" idkey="vm.event._id">
+  <div flex>
+    <ui-gmap-google-map center="vm.event.geo.center" zoom="vm.event.geo.zoom" options="vm.event.geo.options"
+                        refresh="!!vm.event.geo.location" ng-if="!!vm.event.geo.location">
+      <ui-gmap-marker coords="vm.event.geo.location" idkey="vm.event._id">
       </ui-gmap-marker>
     </ui-gmap-google-map>
-    <div ng-hide="!!vm.event.geo">...</div>
   </div>
 
   <div id="event-card-container" layout layout-wrap layout-align="center center">
