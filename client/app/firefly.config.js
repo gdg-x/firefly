@@ -24,7 +24,7 @@ function config(GOOGLE_API_KEY) {
   return {
     GOOGLE_API_KEY: GOOGLE_API_KEY,
     HUB_IP: 'https://hub.gdgx.io/',
-    DOMAIN: 'gdgroups.org',
+    DOMAIN: 'gdg.events',
     DEFAULT_PREFIX: 'ioextended'
   };
 }
