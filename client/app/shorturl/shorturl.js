@@ -8,6 +8,11 @@ angular.module('fireflyApp')
         controller: 'ShorturlAnalyticsCtrl',
         controllerAs: 'vm'
       })
+      .when('/event/:hash', {
+        templateUrl: 'app/shorturl/shorturlEvent.html',
+        controller: 'ShorturlEventCtrl',
+        controllerAs: 'vm'
+      })
       .when('/:hash/', {
         templateUrl: 'app/shorturl/shorturlEvent.html',
         controller: 'ShorturlEventCtrl',

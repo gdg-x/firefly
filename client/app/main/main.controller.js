@@ -1,9 +1,18 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('MainCtrl', function ($rootScope, $scope, $http, $location, $window, config) {
+  .controller('MainCtrl', function ($rootScope, $routeParams, $scope, $http, $location, $window, config) {
     $scope.domain = config.DOMAIN;
     $scope.nearEvent = undefined;
+
+    if ($routeParams.tag) {
+      $scope.prefix = $routeParams.tag;
+      $scope.all = false;
+      $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $routeParams.tag + '?callback=JSON_CALLBACK')
+      .success(function (data) {
+        $scope.tag = data;
+      });
+    }
 
     $http.jsonp(config.HUB_IP + 'api/v1/events/stats?callback=JSON_CALLBACK')
       .success(function(data) {
@@ -12,11 +21,15 @@ angular.module('fireflyApp')
     );
 
     $scope.openEvent = function (eventId) {
-      $location.path('/' + eventId);
+      $location.path('/event/' + eventId);
     };
 
     $scope.openTag = function (path) {
       $window.location.href = 'http://' + path;
+    };
+
+    $scope.openTagList = function () {
+      $window.location.href = 'http://' + config.DOMAIN + '/tags/active';
     };
 
     $scope.distanceFromHere = function (_item, _startPoint) {

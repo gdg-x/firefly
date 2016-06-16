@@ -4,9 +4,16 @@
   <meta view-head property="og:title" content="{{tag.title}}">
   <view-title>{{tag.title}}</view-title>
 
-  <event-map position="geo" tag="prefix"></event-map>
+  <event-map position="geo" tag="{{tag._id}}"></event-map>
 
   <div layout layout-margin layout-wrap layout-align="center start" id="card-box">
+
+    <md-card flex-sm="100" flex-gt-sm="45">
+      <md-card-content>
+        <h3 class="md-title">About {{tag.title}}</h3>
+        <p>{{tag.description}}</p>
+      </md-card-content>
+    </md-card>
 
     <md-card flex-sm="100" flex-gt-sm="45">
       <md-card-content>
@@ -14,7 +21,7 @@
           {{tag.title}} Events near you
         </h3>
         <md-list ng-if="geo.latitude">
-          <md-list-item class="md-2-line" ng-repeat="event in allEvents | orderBy:distanceFromHere | limitTo:5"
+          <md-list-item class="md-2-line" ng-repeat="event in allEvents | orderBy:distanceFromHere"
                         ng-click="openEvent(event._id)">
             <div class="md-list-item-text">
                 <h3 style="color: {{ tag.color }}">{{ event.title }}</h3>
@@ -34,7 +41,7 @@
           Upcoming {{tag.title}} Events
         </h3>
         <md-list ng-if="nextEvent">
-          <md-list-item class="md-2-line" ng-repeat="event in allEvents | orderBy:'start' | limitTo:5"
+          <md-list-item class="md-2-line" ng-repeat="event in allEvents | orderBy:'start'"
                         ng-click="openEvent(event._id)">
             <div class="md-list-item-text">
               <h3 style="color: {{ tag.color }}">{{ event.title }}</h3>
@@ -44,35 +51,6 @@
         </md-list>
         <md-list class="md-2-line" ng-if="!nextEvent">
           No upcoming events in this series.
-        </md-list>
-      </md-card-content>
-    </md-card>
-
-    <md-card flex-sm="100" flex-gt-sm="45">
-      <md-card-content>
-        <h3 class="md-title">About {{tag.title}}</h3>
-        <p>{{tag.description}}</p>
-      </md-card-content>
-    </md-card>
-
-    <md-card flex-sm="100" flex-gt-sm="45">
-      <md-card-content>
-        <h3 class="md-title">Popular topics</h3>
-        <md-list>
-          <md-list-item class="md-2-line" ng-repeat="(key, value) in tags" ng-click="openTag(key + '.' + domain)"
-                        style="display: inline-block;" >
-            <div class="md-list-item-text">
-              <h3 style="color: {{ tag.color }}">{{ key }}</h3>
-              <p>{{ value }} events</p>
-            </div>
-          </md-list-item>
-          <md-list-item class="md-2-line" ng-click="openTagList()"
-                        style="display: inline-block;" >
-            <div class="md-list-item-text">
-              <h3 style="color: {{ tag.color }}">All topics</h3>
-              <p> more ...</p>
-            </div>
-          </md-list-item>
         </md-list>
       </md-card-content>
     </md-card>

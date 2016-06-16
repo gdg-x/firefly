@@ -1,0 +1,17 @@
+<div layout="column" layout-fill ng-show="tag">
+  <meta view-head property="og:type" content="website">
+  <meta view-head property="og:description" content="List of tags">
+  <meta view-head property="og:title" content="GDG Topics">
+  <view-title>GDG Topics</view-title>
+
+  <div layout layout-margin layout-wrap layout-align="center start" id="card-box">
+
+    <md-card flex-sm="100" flex-gt-sm="45" ng-repeat="tag in allTags | orderBy:name" ng-click="openTag(tag)">
+      <md-card-content>
+        <h3 class="md-title">{{tag}}</h3>
+        <h3 style="color: {{ tag.color }}" class="md-title">About {{tag.title}}</h3>
+        <p>{{tag.description}}</p>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
