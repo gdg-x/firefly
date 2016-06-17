@@ -3,7 +3,7 @@
 angular.module('fireflyApp')
   .directive('fireflyFooter', function (themeService) {
     return {
-      templateUrl: 'components/footer/footer.html',
+      templateUrl: 'app/components/footer/footer.html',
       restrict: 'EA',
       scope: {
         tag: '='

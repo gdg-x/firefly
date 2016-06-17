@@ -3,13 +3,46 @@
 angular.module('fireflyApp')
   .constant('GOOGLE_API_KEY', 'Set in server/config/local.env.js')
   .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
-    $routeProvider.otherwise({ redirectTo: '/' });
-
     $locationProvider.html5Mode(true);
 
     $mdThemingProvider.theme('default')
         .primaryPalette('grey')
         .accentPalette('indigo');
+
+    $routeProvider
+      .when('/', {
+        templateUrl: 'app/main/main.html',
+        controller: 'MainCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/:tag/events', {
+        templateUrl: 'app/main/eventList.html',
+        controller: 'MainCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/event/:hash/analytics', {
+        templateUrl: 'app/shorturl/shorturlAnalytics.html',
+        controller: 'ShorturlAnalyticsCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/event/:hash', {
+        templateUrl: 'app/shorturl/shorturlEvent.html',
+        controller: 'ShorturlEventCtrl',
+        controllerAs: 'vm'
+      })
+      // Deprecated routes
+      .when('/:hash/analytics', {
+        templateUrl: 'app/shorturl/shorturlAnalytics.html',
+        controller: 'ShorturlAnalyticsCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/:hash/', {
+        templateUrl: 'app/shorturl/shorturlEvent.html',
+        controller: 'ShorturlEventCtrl',
+        controllerAs: 'vm'
+      })
+      // End deprecated routes
+      .otherwise({ redirectTo: '/' });
   })
   .config(function (uiGmapGoogleMapApiProvider, GOOGLE_API_KEY) {
     uiGmapGoogleMapApiProvider.configure({

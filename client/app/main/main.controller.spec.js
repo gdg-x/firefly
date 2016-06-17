@@ -6,7 +6,6 @@ describe('Controller: MainCtrl', function () {
   // load the controller's module
   //noinspection JSValidateTypes
   beforeEach(module('fireflyApp'));
-
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope, _config_) {
     $httpBackend = _$httpBackend_;
@@ -29,6 +28,6 @@ describe('Controller: MainCtrl', function () {
       .respond([]);
 
     $httpBackend.flush();
-    expect(scope.tags.length).toBe(4);
+    expect(MainCtrl.tags.length).toBe(4);
   });
 });
