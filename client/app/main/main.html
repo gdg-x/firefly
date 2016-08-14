@@ -1,8 +1,8 @@
-<div layout="column" layout-fill ng-show="tag">
+<div layout="column" layout-fill ng-show="::tag">
   <meta view-head property="og:type" content="website">
-  <meta view-head property="og:description" content="{{tag.description}}">
-  <meta view-head property="og:title" content="{{tag.title}}">
-  <view-title>{{tag.title}}</view-title>
+  <meta view-head property="og:description" content="{{ ::tag.description }}">
+  <meta view-head property="og:title" content="{{ ::tag.title }}">
+  <view-title>{{ ::tag.title }}</view-title>
 
   <event-map position="geo" tag="prefix"></event-map>
 
@@ -11,14 +11,14 @@
     <md-card flex-sm="100" flex-gt-sm="45">
       <md-card-content>
         <h3 class="md-title">
-          {{tag.title}} Events near you
+          {{ ::tag.title }} Events near you
         </h3>
         <md-list ng-if="geo.latitude">
-          <md-list-item class="md-2-line" ng-repeat="event in allEvents | orderBy:distanceFromHere | limitTo:5"
-                        ng-click="openEvent(event._id)">
+          <md-list-item class="md-2-line" ng-repeat="event in vm.nearEvents | limitTo:5"
+                        ng-click="vm.openEvent(event._id)">
             <div class="md-list-item-text">
-                <h3 style="color: {{ tag.color }}">{{ event.title }}</h3>
-                <p>{{event.start | date : 'medium' : event.timezone}}</p>
+                <h3 style="color: {{ ::tag.color }}">{{ ::event.title }}</h3>
+                <p>{{ ::event.start | date : 'medium' : event.timezone }}</p>
             </div>
           </md-list-item>
         </md-list>
@@ -31,18 +31,18 @@
     <md-card flex-sm="100" flex-gt-sm="45">
       <md-card-content>
         <h3 class="md-title">
-          Upcoming {{tag.title}} Events
+          Upcoming {{ ::tag.title }} Events
         </h3>
-        <md-list ng-if="nextEvent">
-          <md-list-item class="md-2-line" ng-repeat="event in allEvents | orderBy:'start' | limitTo:5"
-                        ng-click="openEvent(event._id)">
+        <md-list ng-if="vm.nextEvent">
+          <md-list-item class="md-2-line" ng-repeat="event in vm.nextEvents | limitTo:5"
+                        ng-click="vm.openEvent(event._id)">
             <div class="md-list-item-text">
-              <h3 style="color: {{ tag.color }}">{{ event.title }}</h3>
-              <p>{{event.start | date : 'medium' : event.timezone}}</p>
+              <h3 style="color: {{ ::tag.color }}">{{ ::event.title }}</h3>
+              <p>{{ ::event.start | date : 'medium' : event.timezone }}</p>
             </div>
           </md-list-item>
         </md-list>
-        <md-list class="md-2-line" ng-if="!nextEvent">
+        <md-list class="md-2-line" ng-if="!vm.nextEvent">
           No upcoming events in this series.
         </md-list>
       </md-card-content>
@@ -50,8 +50,8 @@
 
     <md-card flex-sm="100" flex-gt-sm="45">
       <md-card-content>
-        <h3 class="md-title">About {{tag.title}}</h3>
-        <p>{{tag.description}}</p>
+        <h3 class="md-title">About {{ ::tag.title }}</h3>
+        <p>{{ ::tag.description }}</p>
       </md-card-content>
     </md-card>
 
@@ -59,11 +59,11 @@
       <md-card-content>
         <h3 class="md-title">Popular topics</h3>
         <md-list>
-          <md-list-item class="md-2-line" ng-repeat="(key, value) in tags" ng-click="openTag(key + '.' + domain)"
+          <md-list-item class="md-2-line" ng-repeat="(key, value) in vm.tags" ng-click="vm.openTag(key)"
                         style="display: inline-block;" >
             <div class="md-list-item-text">
-              <h3 style="color: {{ tag.color }}">{{ key }}</h3>
-              <p>{{ value }} events</p>
+              <h3 style="color: {{ ::tag.color }}">{{ ::key }}</h3>
+              <p>{{ ::value }} events</p>
             </div>
           </md-list-item>
         </md-list>

@@ -1,0 +1,64 @@
+<div layout="column" layout-fill ng-show="::tag">
+  <meta view-head property="og:type" content="website">
+  <meta view-head property="og:description" content="{{ ::tag.description }}">
+  <meta view-head property="og:title" content="{{ ::tag.title }}">
+  <view-title>{{ ::tag.title }}</view-title>
+
+  <event-map position="geo" tag="vm.tag._id"></event-map>
+
+  <div layout layout-wrap layout-align="center start" id="card-box">
+
+    <md-card flex-sm="100" flex-gt-sm="45">
+      <md-card-content>
+        <h3 class="md-title">About {{ ::tag.title }}</h3>
+        <p>{{ ::tag.description }}</p>
+      </md-card-content>
+    </md-card>
+    <span flex-sm="0" flex-gt-sm="45" style="margin: 8px"></span>
+
+    <md-card flex-sm="100" flex-gt-sm="45">
+      <md-card-content>
+        <h3 class="md-title">
+          {{ ::tag.title }} Events near you
+        </h3>
+        <md-virtual-repeat-container class="eventListContainer">
+          <md-list ng-show="geo.latitude">
+            <md-list-item class="md-2-line" md-virtual-repeat="event in vm.nearEvents"
+                          ng-click="vm.openEvent(event._id)">
+              <div class="md-list-item-text">
+                  <h3 style="color: {{ ::tag.color }}">{{ ::event.title }}</h3>
+                  <p>{{ ::event.start | date : 'medium' : event.timezone }}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-virtual-repeat-container>
+        <md-list class="md-2-line" ng-show="!geo.latitude">
+          Waiting for location...
+        </md-list>
+      </md-card-content>
+    </md-card>
+
+    <md-card flex-sm="100" flex-gt-sm="45">
+      <md-card-content>
+        <h3 class="md-title">
+          Upcoming {{ ::tag.title }} Events
+        </h3>
+        <md-virtual-repeat-container class="eventListContainer">
+          <md-list ng-show="vm.nextEvent">
+            <md-list-item class="md-2-line" md-virtual-repeat="event in vm.nextEvents"
+                          ng-click="vm.openEvent(event._id)">
+              <div class="md-list-item-text">
+                  <h3 style="color: {{ ::tag.color }}">{{ ::event.title }}</h3>
+                  <p>{{ ::event.start | date : 'medium' : event.timezone }}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-virtual-repeat-container>
+        <md-list class="md-2-line" ng-show="!vm.nextEvent">
+          No upcoming events in this series.
+        </md-list>
+      </md-card-content>
+    </md-card>
+
+  </div>
+</div>

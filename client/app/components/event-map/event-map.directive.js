@@ -3,7 +3,7 @@
 angular.module('fireflyApp')
   .directive('eventMap', function ($http, uiGmapGoogleMapApi, config) {
     return {
-      templateUrl: 'app/event-map/event-map.html',
+      templateUrl: 'app/components/event-map/event-map.html',
       restrict: 'EA',
       scope: {
         position: '=',
