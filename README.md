@@ -28,8 +28,7 @@ Local Development
   1. Go to APIs & Auth->Credentials. Add Credentials->API key->Browser key->Create (keep `Any referrer allowed` set).
 1. `cd firefly`
 1. `npm install`
-1. `npm install -g lite-server`
-1. `lite-server`
+1. `npm start`
 
 Prod Deployment
 ===============

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .constant('GOOGLE_API_KEY', 'Set in server/config/local.env.js')
+  .constant('GOOGLE_API_KEY', 'Set in /local.env.js')
   .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
     $locationProvider.html5Mode(true);
 
@@ -20,23 +20,7 @@ angular.module('fireflyApp')
         controller: 'MainCtrl',
         controllerAs: 'vm'
       })
-      .when('/event/:hash/analytics', {
-        templateUrl: 'app/shorturl/shorturlAnalytics.html',
-        controller: 'ShorturlAnalyticsCtrl',
-        controllerAs: 'vm'
-      })
       .when('/event/:hash', {
-        templateUrl: 'app/shorturl/shorturlEvent.html',
-        controller: 'ShorturlEventCtrl',
-        controllerAs: 'vm'
-      })
-      // Deprecated routes
-      .when('/:hash/analytics', {
-        templateUrl: 'app/shorturl/shorturlAnalytics.html',
-        controller: 'ShorturlAnalyticsCtrl',
-        controllerAs: 'vm'
-      })
-      .when('/:hash/', {
         templateUrl: 'app/shorturl/shorturlEvent.html',
         controller: 'ShorturlEventCtrl',
         controllerAs: 'vm'
@@ -58,6 +42,6 @@ function config(GOOGLE_API_KEY) {
     GOOGLE_API_KEY: GOOGLE_API_KEY,
     HUB_IP: 'https://hub.gdgx.io/',
     DOMAIN: 'gdg.events',
-    DEFAULT_PREFIX: 'ioextended'
+    DEFAULT_PREFIX: 'devfest'
   };
 }
