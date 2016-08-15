@@ -8,15 +8,19 @@ angular.module('fireflyApp')
     if ($routeParams.tag) {
       $rootScope.prefix = $routeParams.tag;
       vm.all = false;
-      $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $rootScope.prefix + '?callback=JSON_CALLBACK')
-        .success(function (data) {
-        $rootScope.tag = data;
-        $rootScope.tagColor = {
-            'background-color': $rootScope.tag.color,
-            height: '4px'
-          };
-      });
+    } else {
+      vm.all = true;
+      $rootScope.prefix = config.DEFAULT_PREFIX;
     }
+
+    $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $rootScope.prefix + '?callback=JSON_CALLBACK')
+      .success(function (data) {
+      $rootScope.tag = data;
+      $rootScope.tagColor = {
+          'background-color': $rootScope.tag.color,
+          height: '4px'
+        };
+    });
 
     $http.jsonp(config.HUB_IP + 'api/v1/events/stats?callback=JSON_CALLBACK')
       .success(function(data) {
