@@ -4,15 +4,10 @@ Firefly
 
 This project is to help organizers to better promote their events.
 
-It relies on the data stored on the GDG[x] Hub.
+It relies on the data stored in the GDG[x] Hub.
 
 **List of events**
-Organizers can use short urls like http://devfest.gdgroups.org to promote devfests, or 
-http://brussels.gdgroups.org (to be implemented) to promote events for GDG Brussels.
-
-**Url shortener**
-Furthermore, it can be used as url shortener like http://gdgroups.org/4363aa to direct to a specific event's page.
-The statistics are shown at http://gdgroups.org/4363aa/analytics
+Organizers can use URLs like [gdg.events/devfest/events](https://gdg.events/devfest/events) to promote DevFest events.
 
 There is no need for organizers to clone this repo or host this project on their servers.
 
@@ -27,40 +22,34 @@ Discuss [issues](https://github.com/gdg-x/firefly/issues) and [pull requests](ht
 Local Development
 =================
 1. Clone the git repository.
-1. Create and customize `server/config/local.env.js` based on `server/config/local.env.sample.js`.
+1. Create and customize `local.env.js` based on `local.env.sample.js`.
 1. Define the **GOOGLE_API_KEY**: The API key for your project, available from the [Cloud Console](https://cloud.google.com/console)
-  1. Create a new project then go to APIs & Auth->APIs, activate Google+ API.
+  1. Create a new project then go to APIs & Auth->APIs, activate Google+ and Google Maps JavaScript v3 APIs.
   1. Go to APIs & Auth->Credentials. Add Credentials->API key->Browser key->Create (keep `Any referrer allowed` set).
-1. Define the **SESSION_SECRET**: The Client secret for your project, available from the [Cloud Console](https://cloud.google.com/console)
-  1. Go to APIs & Auth->Credentials. Add Credentials->API key->OAuth 2.0 client ID->Web Application->Create.
-1. `bower install`
+1. `cd firefly`
 1. `npm install`
-1. `mongod` or `mongostart` (configured [here](https://github.com/gdg-x/hub/wiki/MongoDB-Config)).
-1. `grunt serve`
-
-* `client` contains the AngularJS app
-* `server` contains the logic for the url shortener
+1. `npm install -g lite-server`
+1. `lite-server`
 
 Prod Deployment
 ===============
-1. `git fetch`
-1. `git pull`
-1. `grunt build`
-1. `npm runScript configProd`
-1. `nohup npm start &`
-1. Check the server at http://gdgroups.org
+1. `cd firefly`
+1. `npm install -g firebase-tools`
+1. `firebase login`
+1. `firebase deploy`
+1. Check the server at https://gdg.events
 
 ###Contributors
 See [list of contributors](https://github.com/gdg-x/firefly/graphs/contributors)
 
 Maintainer: [@splaktar](https://github.com/splaktar).
 
-######GDG Apps, GDG[x] are not endorsed and/or supported by Google, the corporation.
+######GDG Apps, GDG[x] is not endorsed and/or supported by Google, the corporation.
 
 License
 --------
 
-    © 2013-2015 GDG[x]
+    © 2013-2016 GDG[x]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -73,6 +62,3 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-
-
