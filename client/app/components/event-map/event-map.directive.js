@@ -40,7 +40,7 @@ angular.module('fireflyApp')
 
         scope.$watch('position', function(position) {
           if (position) {
-            angular.copy(position, scope.map.center);
+            scope.map.center = position;
           }
         });
 
