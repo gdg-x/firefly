@@ -1,18 +1,15 @@
 module.exports = function (grunt) {
-  var opn = require('opn'); // jshint ignore:line
   var localConfig;
   try {
-    localConfig = require('./server/config/local.env');
+    localConfig = require('./local.env');
   } catch (e) {
     localConfig = {};
   }
   const DOMAIN = localConfig.DOMAIN || process.env.DOMAIN || 'localhost';
-  const PORT = localConfig.PORT || process.env.PORT || 9000;
   const HUB_IP = localConfig.HUB_IP || 'https://hub.gdgx.io/';
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
-    express: 'grunt-express-server',
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
@@ -35,22 +32,6 @@ module.exports = function (grunt) {
       client: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
-    express: {
-      options: {
-        port: PORT
-      },
-      dev: {
-        options: {
-          script: 'server/app.js',
-          debug: true
-        }
-      },
-      prod: {
-        options: {
-          script: 'dist/server/app.js'
-        }
-      }
-    },
     watch: {
       injectJS: {
         files: [
@@ -66,10 +47,6 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.css'
         ],
         tasks: ['injector:css']
-      },
-      mochaTest: {
-        files: ['server/**/*.spec.js'],
-        tasks: ['env:test', 'mochaTest']
       },
       jsTest: {
         files: [
@@ -93,16 +70,6 @@ module.exports = function (grunt) {
         options: {
           livereload: true
         }
-      },
-      express: {
-        files: [
-          'server/**/*.{js,json}'
-        ],
-        tasks: ['express:dev', 'wait'],
-        options: {
-          livereload: true,
-          nospawn: true //Without this option specified express won't be reloaded
-        }
       }
     },
 
@@ -111,12 +78,6 @@ module.exports = function (grunt) {
       options: {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
-      },
-      server: {
-        options: {
-          jshintrc: 'server/.jshintrc'
-        },
-        src: [ 'server/{,*/}*.js']
       },
       all: [
         '<%= yeoman.client %>/{app,components}/**/*.js',
@@ -154,12 +115,10 @@ module.exports = function (grunt) {
             '.tmp',
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/.git*',
-            '!<%= yeoman.dist %>/.openshift',
             '!<%= yeoman.dist %>/Procfile'
           ]
         }]
-      },
-      server: '.tmp'
+      }
     },
 
     // Add vendor prefixed styles
@@ -182,31 +141,6 @@ module.exports = function (grunt) {
       custom: {
         options: {
           'web-host': 'localhost'
-        }
-      }
-    },
-
-    // Use nodemon to run server in debug mode with an initial breakpoint
-    nodemon: {
-      debug: {
-        script: 'server/app.js',
-        options: {
-          nodeArgs: ['--debug-brk'],
-          env: {
-            PORT: PORT
-          },
-          callback: function (nodemon) {
-            nodemon.on('log', function (event) {
-              console.log(event.colour);
-            });
-
-            // opens browser on initial server start
-            nodemon.on('config:update', function () {
-              setTimeout(function () {
-                opn('http://localhost:' + PORT + '/debug?port=5858');
-              }, 500);
-            });
-          }
         }
       }
     },
@@ -376,8 +310,8 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'bower_components/**/*',
-            'assets/images/{,*/}*.{webp}',
-            'assets/fonts/**/*',
+            'app/assets/images/**/*',
+            'app/assets/fonts/**/*',
             'index.html',
             '.well-known/assetlinks.json'
           ]
@@ -386,13 +320,6 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/public/assets/images',
           src: ['generated/*']
-        }, {
-          expand: true,
-          dest: '<%= yeoman.dist %>',
-          src: [
-            'package.json',
-            'server/**/*'
-          ]
         }]
       },
       styles: {
@@ -416,21 +343,12 @@ module.exports = function (grunt) {
           remote: 'heroku',
           branch: 'master'
         }
-      },
-      openshift: {
-        options: {
-          remote: 'openshift',
-          branch: 'master'
-        }
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-      server: [
-      ],
-      test: [
-      ],
+      test: [],
       debug: {
         tasks: [
           'nodemon',
@@ -452,13 +370,6 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true
       }
-    },
-
-    mochaTest: {
-      options: {
-        reporter: 'spec'
-      },
-      src: ['server/**/*.spec.js']
     },
 
     protractor: {
@@ -542,57 +453,9 @@ module.exports = function (grunt) {
     }, 1500);
   });
 
-  grunt.registerTask('open', function () {
-    opn('http://localhost:' + PORT);
-  });
-
-  grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
-    this.async();
-  });
-
-  grunt.registerTask('serve', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'express-keepalive']);
-    }
-
-    if (target === 'debug') {
-      return grunt.task.run([
-        'clean:server',
-        'env:all',
-        'concurrent:server',
-        'injector',
-        'wiredep',
-        'autoprefixer',
-        'concurrent:debug'
-      ]);
-    }
-
-    grunt.task.run([
-      'clean:server',
-      'env:all',
-      'concurrent:server',
-      'injector',
-      'wiredep',
-      'autoprefixer',
-      'express:dev',
-      'wait',
-      'open',
-      'watch'
-    ]);
-  });
-
   grunt.registerTask('test', function(target) {
-    if (target === 'server') {
+    if (target === 'client') {
       return grunt.task.run([
-        'env:all',
-        'env:test',
-        'mochaTest'
-      ]);
-    }
-
-    else if (target === 'client') {
-      return grunt.task.run([
-        'clean:server',
         'env:all',
         'concurrent:test',
         'injector',
@@ -603,21 +466,18 @@ module.exports = function (grunt) {
 
     else if (target === 'e2e') {
       return grunt.task.run([
-        'clean:server',
         'env:all',
         'env:test',
         'concurrent:test',
         'injector',
         'wiredep',
         'autoprefixer',
-        'express:dev',
         'protractor'
       ]);
     }
 
     else {
       grunt.task.run([
-        'test:server',
         'test:client'
       ]);
     }

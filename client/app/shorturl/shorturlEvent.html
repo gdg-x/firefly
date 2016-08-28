@@ -10,43 +10,26 @@
 
     <div class="event-info" flex-sm="100" flex-md="60" flex-gt-md="40">
       <img ng-show="vm.chapter._id != undefined" class="event-info-image" ng-src="{{ vm.image }}"/>
-      <h4>
-        <md-icon class="material-icons" aria-label="Event">event</md-icon>
-        Hosted by
-      </h4>
+      <h4><md-icon class="material-icons" aria-label="Event">event</md-icon> Hosted by</h4>
       <p class="event-text chapter-name">{{ vm.chapter.name }}</p>
-      <md-button class="md-accent" target="_blank"
-                 ng-href="http://developers.google.com/groups/chapter/{{ vm.chapter._id }}/">
+      <md-button class="md-accent" target="_blank" ng-href="http://developers.google.com/groups/chapter/{{ vm.chapter._id }}/">
         Visit Chapter Site
       </md-button>
     </div>
 
     <div class="event-info" flex-sm="100" flex-md="60" flex-gt-md="40">
-      <a ng-href="{{ vm.gdgeventsshorturl }}">
-        <qr input-mode="'8bit'" size="70" text="vm.gdgeventsshorturl" image="true" class="event-info-image"></qr>
-      </a>
-      <h4>
-        <a ng-href="{{ vm.gdgeventsshorturl }}/analytics">
-          <md-icon class="material-icons" aria-label="Event Site">web</md-icon></a>
-        Event site
-      </h4>
-      <div class="event-text">
-        Short URL:<br/>
-        <a ng-href="{{ vm.gdgeventsshorturl }}">{{ vm.gdgeventsshorturl }}</a>
-      </div>
+      <h4><md-icon class="material-icons" aria-label="Event Site">web</md-icon> Event site</h4>
 
-      <md-button class="md-accent" target="_blank" ng-href="{{ vm.event.eventUrl }}"
-                 ng-show="!!vm.event.eventUrl">
+      <md-button class="md-accent" target="_blank" ng-href="{{ vm.event.eventUrl }}" ng-show="!!vm.event.eventUrl">
         Google+ event
       </md-button>
-      <md-button class="md-accent" target="_blank"
-                 ng-href="http://developers.google.com/events/{{ vm.event._id }}/">
+      <md-button class="md-accent" target="_blank" ng-href="http://developers.google.com/events/{{ vm.event._id }}/">
         Visit Event Site
       </md-button>
     </div>
   </div>
 
-  <div flex>
+  <div flex ng-if="vm.event.geo">
     <ui-gmap-google-map center="vm.event.geo.center" zoom="vm.event.geo.zoom" options="vm.event.geo.options"
                         refresh="!!vm.event.geo.location" ng-if="!!vm.event.geo.location">
       <ui-gmap-marker coords="vm.event.geo.location" idkey="vm.event._id">

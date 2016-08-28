@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('ShorturlEventCtrl', function ($http, $routeParams, config, themeService) {
+  .controller('ShorturlEventCtrl', function ($http, $routeParams, $location, $log, config, themeService) {
     var vm = this;
     vm.convertHex = themeService.convertHex;
 
-    $http.get('/api/shorturl/' + $routeParams.hash).success(function (data) {
-      vm.shorturl = data;
-      vm.gdgeventsshorturl = 'http://' + config.DOMAIN + '/' + data.hash;
-      $http.jsonp(config.HUB_IP + 'api/v1/events/' +
-        data.event_id + '?callback=JSON_CALLBACK').success(processEventData); // jshint ignore:line
+    $http.jsonp(config.HUB_IP + 'api/v1/events/' + $routeParams.hash + '?callback=JSON_CALLBACK')
+    .success(processEventData)
+    .catch(function() {
+      $log.warn('Event "' + $routeParams.hash + '" not found.');
+      $location.path('/');
     });
 
     function processEventData(eventData) {

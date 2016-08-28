@@ -4,7 +4,7 @@
                    coords="'coordinates'" doCluster="true" click="onClick">
 		<ui-gmap-window ng-repeat="marker in markers" coords="marker.coordinates" show="marker.show">
 			<div>
-				<b><a href="/{{marker.id}}/">{{marker.title}}</a></b>
+				<b><a href="event/{{marker.id}}/">{{marker.title}}</a></b>
 			</div>
 		</ui-gmap-window>
 	</ui-gmap-markers>

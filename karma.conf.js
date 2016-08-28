@@ -7,12 +7,11 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
-    // testing framework to use (jasmine/mocha/qunit/...)
+    // testing framework to use (jasmine/mocha)
     frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
-      'client/bower_components/jquery/dist/jquery.js',
       'client/bower_components/angular/angular.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       'client/bower_components/angular-resource/angular-resource.js',
@@ -23,32 +22,24 @@ module.exports = function(config) {
       'client/bower_components/angular-animate/angular-animate.js',
       'client/bower_components/angular-material/angular-material.js',
       'client/bower_components/angular-google-chart/ng-google-chart.js',
+      'client/bower_components/lodash/lodash.js',
+      'client/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
       'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
-      'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/ngGeolocation/ngGeolocation.js',
       'client/bower_components/angular-linkify/angular-linkify.js',
       'client/bower_components/angularjs-viewhead/angularjs-viewhead.js',
       'client/bower_components/devintent-qr/src/angular-qr.js',
-      'client/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
-      'client/bower_components/lodash/lodash.js',
       'client/app/firefly.module.js',
       'client/app/firefly.config.js',
       'client/app/**/*.js',
-      'client/components/**/*.js',
-      'client/app/**/*.html',
-      'client/components/**/*.html'
+      'client/app/**/*.html'
     ],
 
     preprocessors: {
-      '**/*.jade': 'ng-jade2js',
       '**/*.html': 'html2js'
     },
 
     ngHtml2JsPreprocessor: {
-      stripPrefix: 'client/'
-    },
-
-    ngJade2JsPreprocessor: {
       stripPrefix: 'client/'
     },
 
