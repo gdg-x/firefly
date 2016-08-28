@@ -25,13 +25,12 @@ angular.module('fireflyApp')
         controller: 'ShorturlEventCtrl',
         controllerAs: 'vm'
       })
-      // End deprecated routes
       .otherwise({ redirectTo: '/' });
   })
   .config(function (uiGmapGoogleMapApiProvider, GOOGLE_API_KEY) {
     uiGmapGoogleMapApiProvider.configure({
       key: GOOGLE_API_KEY,
-      v: '3.23',
+      v: '3.24',
       libraries: 'weather,geometry,visualization'
     });
   })
