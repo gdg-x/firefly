@@ -73,10 +73,11 @@ function eventMap($http, uiGmapGoogleMapApi, config) {
             }.bind(marker, marker);
 
             scope.markers.push(marker);
-            if (scope.maps) {
-              scope.maps.event.trigger(scope.map.control.getGMap(), 'resize');
-            }
           }
+        }
+
+        if (scope.maps) {
+          scope.maps.event.trigger(scope.map.control.getGMap(), 'resize');
         }
       };
 
