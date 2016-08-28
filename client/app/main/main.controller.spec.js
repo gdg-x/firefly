@@ -24,7 +24,7 @@ describe('Controller: MainCtrl', function () {
       config.HUB_IP + 'api/v1/events/stats?callback=JSON_CALLBACK')
       .respond({ upcoming_top_tags: ['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express'] }); // jshint ignore:line
     $httpBackend.expectJSONP(
-      config.HUB_IP + 'api/v1/events/tag/' + scope.prefix + '?perpage=999&callback=JSON_CALLBACK')
+      config.HUB_IP + 'api/v1/events/tag/' + scope.prefix + '/upcoming?perpage=999&callback=JSON_CALLBACK')
       .respond([]);
 
     $httpBackend.flush();
