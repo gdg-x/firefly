@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div flex>
+  <div flex ng-if="vm.event.geo">
     <ui-gmap-google-map center="vm.event.geo.center" zoom="vm.event.geo.zoom" options="vm.event.geo.options"
                         refresh="!!vm.event.geo.location" ng-if="!!vm.event.geo.location">
       <ui-gmap-marker coords="vm.event.geo.location" idkey="vm.event._id">

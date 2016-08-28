@@ -4,7 +4,7 @@
   <meta view-head property="og:title" content="{{ tag.title }}">
   <view-title>{{ tag.title }}</view-title>
 
-  <event-map position="geo" tag="vm.tag._id"></event-map>
+  <event-map position="geo" tag="prefix"></event-map>
 
   <div layout layout-wrap layout-align="center start" id="card-box">
 
@@ -26,8 +26,8 @@
             <md-list-item class="md-2-line" md-virtual-repeat="event in vm.nearEvents"
                           ng-click="vm.openEvent(event._id)">
               <div class="md-list-item-text">
-                  <h3 style="color: {{ tag.color }}">{{ ::event.title }}</h3>
-                  <p>{{ ::event.start | date : 'medium' : event.timezone }}</p>
+                  <h3 style="color: {{ tag.color }}">{{ event.title }}</h3>
+                  <p>{{ event.start | date : 'medium' : event.timezone }}</p>
               </div>
             </md-list-item>
           </md-list>
@@ -48,8 +48,8 @@
             <md-list-item class="md-2-line" md-virtual-repeat="event in vm.nextEvents"
                           ng-click="vm.openEvent(event._id)">
               <div class="md-list-item-text">
-                  <h3 style="color: {{ tag.color }}">{{ ::event.title }}</h3>
-                  <p>{{ ::event.start | date : 'medium' : event.timezone }}</p>
+                  <h3 style="color: {{ tag.color }}">{{ event.title }}</h3>
+                  <p>{{ event.start | date : 'medium' : event.timezone }}</p>
               </div>
             </md-list-item>
           </md-list>

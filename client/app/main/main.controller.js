@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fireflyApp')
-  .controller('MainCtrl', function ($rootScope, $filter, $routeParams, $http, $location, $window, config) {
+  .controller('MainCtrl', function ($rootScope, $filter, $routeParams, $http, $location, $window, $timeout, config) {
     var vm = this;
     vm.domain = config.DOMAIN;
 
@@ -9,9 +9,13 @@ angular.module('fireflyApp')
       $rootScope.prefix = $routeParams.tag;
       vm.all = false;
     } else {
-      vm.all = true;
+      vm.all = false;
       $rootScope.prefix = config.DEFAULT_PREFIX;
     }
+
+    $rootScope.$on('$geolocation.position.changed', function() {
+      vm.nearEvents = $filter('orderBy')(vm.nearEvents, distanceFromHere);
+    });
 
     $http.jsonp(config.HUB_IP + 'api/v1/tags/' + $rootScope.prefix + '?callback=JSON_CALLBACK')
       .success(function (data) {
