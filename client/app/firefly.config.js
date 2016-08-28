@@ -25,12 +25,15 @@ angular.module('fireflyApp')
         controller: 'ShorturlEventCtrl',
         controllerAs: 'vm'
       })
+      .when('/:tag', {
+        redirectTo: '/:tag/events'
+      })
       .otherwise({ redirectTo: '/' });
   })
   .config(function (uiGmapGoogleMapApiProvider, GOOGLE_API_KEY) {
     uiGmapGoogleMapApiProvider.configure({
       key: GOOGLE_API_KEY,
-      v: '3.24',
+      v: '3.25',
       libraries: 'weather,geometry,visualization'
     });
   })
