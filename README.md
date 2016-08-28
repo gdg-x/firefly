@@ -35,6 +35,7 @@ Prod Deployment
 1. `cd firefly`
 1. `npm install -g firebase-tools`
 1. `firebase login`
+1. `grunt`
 1. `firebase deploy`
 1. Check the server at https://gdg.events
 
