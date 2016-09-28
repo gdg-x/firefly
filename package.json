@@ -59,6 +59,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "auth": "firebase login",
+    "deploy": "firebase deploy",
     "postinstall": "bower install",
     "start": "lite-server",
     "test": "grunt test",
