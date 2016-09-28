@@ -16,7 +16,9 @@ angular.module('fireflyApp')
         controllerAs: 'vm'
       })
       .when('/invite', {
-        templateUrl: 'app/site/app-invite.html'
+        templateUrl: 'app/appInvite/appInvite.html',
+        controller: 'AppInviteCtrl',
+        controllerAs: 'vm'
       })
       .when('/:tag/events', {
         templateUrl: 'app/main/eventList.html',
