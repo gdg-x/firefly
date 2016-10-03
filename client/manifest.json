@@ -1,0 +1,27 @@
+{
+  "name": "Global Google Developers Group (GDG) Event Directory",
+  "short_name": "GDG Events",
+  "lang": "en-US",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#2196F3",
+  "background_color": "#111111",
+  "icons": [
+    {
+      "src": "images/icon_48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon_144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "related_applications": [{
+    "platform": "web"
+  }, {
+    "platform": "play",
+    "url": "https://play.google.com/store/apps/details?id=org.gdg.frisbee.android"
+  }]
+}
