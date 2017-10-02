@@ -42,14 +42,14 @@ Prod Deployment
 ###Contributors
 See [list of contributors](https://github.com/gdg-x/firefly/graphs/contributors)
 
-Maintainer: [@splaktar](https://github.com/splaktar).
+Maintainer: None.
 
 ######GDG Apps, GDG[x] is not endorsed and/or supported by Google, the corporation.
 
 License
 --------
 
-    © 2013-2016 GDG[x]
+    © 2013-2017 GDG[x]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
