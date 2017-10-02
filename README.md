@@ -39,12 +39,12 @@ Prod Deployment
 1. `firebase deploy`
 1. Check the server at https://gdg.events
 
-###Contributors
+### Contributors
 See [list of contributors](https://github.com/gdg-x/firefly/graphs/contributors)
 
 Maintainer: None.
 
-######GDG Apps, GDG[x] is not endorsed and/or supported by Google, the corporation.
+###### GDG Apps, GDG[x] is not endorsed and/or supported by Google, the corporation.
 
 License
 --------
